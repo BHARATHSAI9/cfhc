@@ -14,7 +14,10 @@
       --bg:#070707;--bg2:#111;--bg3:#181818;
       --border:#222;--border2:#333;
       --text:#F2F2F2;--text2:#888;--text3:#444;
-      --bar-bg:#1c1c1c;--logo-wrap-bg:transparent;--logo-wrap-r:0px;
+      /* subtle pale panel behind logo so it reads on dark backgrounds */
+      --logo-wrap-bg:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.035));
+      --logo-wrap-border:rgba(255,255,255,0.09);
+      --logo-wrap-r:6px;
       --card-hover-bg:rgba(232,119,34,0.07);
       --ticker-bg:#E87722;--ticker-text:#fff;
       --slash-color:rgba(232,119,34,0.06);
@@ -64,7 +67,10 @@
     .hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
 
     .logo-wrap{width:min(420px,85vw);margin-bottom:2rem;background:var(--logo-wrap-bg);border-radius:var(--logo-wrap-r);padding:.5rem;transition:background .3s,border-radius .3s}
-    .logo-wrap img{width:100%;height:auto;display:block}
+    .logo-wrap{border:1px solid var(--logo-wrap-border);box-shadow:none;display:inline-block}
+    .logo-wrap img{width:100%;height:auto;display:block;filter:none;transition:transform .25s}
+    /* removed shadows; keep subtle hover lift if desired */
+    .logo-wrap:hover img{transform:translateY(-3px);filter:none}
 
     /* ── BIG BADGE ── */
     .hero-badge{
@@ -239,7 +245,7 @@
 <div class="section-wrap reveal">
   <div class="section-label">Interactive</div>
   <div class="section-title">Today's WOD Generator</div>
-  <p class="section-body">Can't make it to the box? Here's a random WOD to torture yourself with at home. You're welcome.</p>
+  <p class="section-body">Can't make it to the box? Here's a WOD to torture yourself with at home. You're welcome.</p>
   <div class="wod-card">
     <div class="wod-display" id="wodDisplay">Hit "Generate" to find out what suffering awaits you today.</div>
     <div class="wod-meta" id="wodMeta"></div>
