@@ -1,431 +1,420 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CrossFit HITEC City — Coming Soon</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,700&family=Barlow:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-    :root {
-      --orange: #E87722;
-      --orange-glow: rgba(232,119,34,0.12);
+    :root{--orange:#E87722;--orange-dim:rgba(232,119,34,0.18);--orange-glow:rgba(232,119,34,0.10)}
+
+    [data-theme="dark"]{
+      --bg:#070707;--bg2:#111;--bg3:#181818;
+      --border:#222;--border2:#333;
+      --text:#F2F2F2;--text2:#888;--text3:#444;
+      --bar-bg:#1c1c1c;--logo-wrap-bg:transparent;--logo-wrap-r:0px;
+      --card-hover-bg:rgba(232,119,34,0.07);
+      --ticker-bg:#E87722;--ticker-text:#fff;
+      --slash-color:rgba(232,119,34,0.06);
+      --stamp-color:rgba(232,119,34,0.07);
     }
-
-    /* ── DARK THEME (default) ── */
-    [data-theme="dark"] {
-      --bg:        #060606;
-      --bg-card:   #161616;
-      --border:    #222222;
-      --text:      #F4F4F4;
-      --text-muted:#aaaaaa;
-      --text-dim:  #555555;
-      --footer:    #2e2e2e;
-      --bar-bg:    #222222;
-      --wod-name:  #777777;
-      --glow-color: rgba(232,119,34,0.07);
-      --logo-bg:   transparent;
-      --logo-radius: 0;
-    }
-
-    /* ── LIGHT THEME ── */
-    [data-theme="light"] {
-      --bg:        #F2EDE8;
-      --bg-card:   #FFFFFF;
-      --border:    #E0D8D0;
-      --text:      #1A1A1A;
-      --text-muted:#666666;
-      --text-dim:  #AAAAAA;
-      --footer:    #CCCCCC;
-      --bar-bg:    #E0D8D0;
-      --wod-name:  #999999;
-      --glow-color: rgba(232,119,34,0.10);
-      --logo-bg:   #1A1A1A;
-      --logo-radius: 16px;
+    [data-theme="light"]{
+      --bg:#EEE8DF;--bg2:#fff;--bg3:#f5f0ea;
+      --border:#DDD5C8;--border2:#C8BEB2;
+      --text:#151515;--text2:#666;--text3:#AAA;
+      --bar-bg:#DDD5C8;--logo-wrap-bg:#1a1a1a;--logo-wrap-r:14px;
+      --card-hover-bg:rgba(232,119,34,0.06);
+      --ticker-bg:#E87722;--ticker-text:#fff;
+      --slash-color:rgba(232,119,34,0.08);
+      --stamp-color:rgba(232,119,34,0.08);
     }
 
-    /* Auto-detect OS preference on first load */
-    @media (prefers-color-scheme: light) {
-      html:not([data-theme]) { --bg:#F2EDE8; --bg-card:#FFFFFF; --border:#E0D8D0; --text:#1A1A1A; --text-muted:#666; --text-dim:#AAA; --footer:#CCC; --bar-bg:#E0D8D0; --wod-name:#999; --glow-color:rgba(232,119,34,0.10); --logo-bg:#1A1A1A; --logo-radius:16px; }
-    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
 
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Barlow', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-      transition: background-color 0.35s ease, color 0.35s ease;
-    }
+    /* ── THEME BTN ── */
+    .theme-btn{position:fixed;top:1rem;right:1rem;z-index:300;background:var(--bg2);border:1px solid var(--border2);border-radius:50px;padding:.35rem .9rem;cursor:pointer;display:flex;align-items:center;gap:.4rem;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);transition:border-color .2s,color .2s,background .3s}
+    .theme-btn:hover{border-color:var(--orange);color:var(--orange)}
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, var(--glow-color) 0%, transparent 65%);
-      pointer-events: none;
-      z-index: 0;
-      transition: background 0.35s ease;
-    }
+    /* ── TICKER ── */
+    .ticker-wrap{background:var(--ticker-bg);overflow:hidden;width:100%;padding:.55rem 0;position:relative;z-index:10}
+    .ticker{display:flex;width:max-content;animation:ticker-scroll 28s linear infinite}
+    .ticker-item{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ticker-text);padding:0 2.5rem;white-space:nowrap}
+    .ticker-sep{color:rgba(255,255,255,0.4);padding:0 .5rem}
+    @keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-    /* ── THEME TOGGLE ── */
-    .theme-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 100;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: 0.4rem 0.85rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      transition: border-color 0.2s, color 0.2s, background 0.35s;
-    }
-    .theme-toggle:hover { border-color: var(--orange); color: var(--orange); }
-    .theme-toggle .icon { font-size: 0.9rem; line-height: 1; }
+    /* ── HERO ── */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 1.5rem 4rem;text-align:center;position:relative;overflow:hidden}
 
-    .wrapper {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2.5rem 1.5rem 2rem;
-      text-align: center;
-    }
+    /* diagonal slash bg */
+    .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(60deg,var(--slash-color) 0px,var(--slash-color) 1px,transparent 1px,transparent 60px);pointer-events:none;z-index:0}
+    /* orange glow blob */
+    .hero::after{content:'';position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,var(--orange-glow) 0%,transparent 70%);pointer-events:none;z-index:0}
 
-    /* ── LOGO ── */
-    .logo-wrap {
-      width: min(400px, 85vw);
-      margin-bottom: 0.25rem;
-      background: var(--logo-bg);
-      border-radius: var(--logo-radius);
-      padding: 0.5rem;
-      transition: background 0.35s ease, border-radius 0.35s ease;
-    }
-    .logo-wrap img { width: 100%; height: auto; display: block; }
+    /* big COMING SOON watermark */
+    .hero-stamp{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,18vw,14rem);color:var(--stamp-color);letter-spacing:.1em;user-select:none;pointer-events:none;z-index:0;white-space:nowrap;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-8deg)}
 
-    /* ── BADGE ── */
-    .badge {
-      display: inline-block;
-      background: transparent;
-      border: 1px solid var(--orange);
-      color: var(--orange);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.35rem 1rem;
-      border-radius: 2px;
-      margin-bottom: 2rem;
-      animation: pulse-badge 2.5s ease-in-out infinite;
-    }
-    @keyframes pulse-badge { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    /* orange side-slash accent */
+    .hero-slash-left{position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--orange);z-index:1}
+    .hero-slash-right{position:absolute;right:0;top:0;bottom:0;width:5px;background:var(--orange);z-index:1}
 
-    /* ── BARBELL ── */
-    .barbell-wrap { margin: 0 auto 1.75rem; width: min(300px, 82vw); }
-    .barbell { animation: lift 1.7s cubic-bezier(0.4,0,0.2,1) infinite; transform-origin: center bottom; }
-    @keyframes lift {
-      0%   { transform: translateY(0px) rotate(0deg); }
-      30%  { transform: translateY(-16px) rotate(-1.5deg); }
-      50%  { transform: translateY(-20px) rotate(0deg); }
-      70%  { transform: translateY(-16px) rotate(1.5deg); }
-      100% { transform: translateY(0px) rotate(0deg); }
-    }
-    .bar-shaft { fill: var(--bar-bg); transition: fill 0.35s; }
-    .bar-collar { fill: var(--border); transition: fill 0.35s; }
-    .bar-knurl  { stroke: var(--wod-name); transition: stroke 0.35s; }
+    .hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
 
-    /* ── STATUS CARD ── */
-    .status-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--orange);
-      border-radius: 4px;
-      padding: 1.4rem 1.75rem;
-      max-width: 540px;
-      width: 100%;
-      margin: 0 auto 2rem;
-      text-align: left;
-      transition: background 0.35s, border-color 0.35s;
-    }
-    .status-card h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 0.65rem;
-    }
-    .status-card p { font-size: 0.95rem; line-height: 1.65; color: var(--text-muted); }
-    .status-card p strong { color: var(--text); }
+    .logo-wrap{width:min(420px,85vw);margin-bottom:2rem;background:var(--logo-wrap-bg);border-radius:var(--logo-wrap-r);padding:.5rem;transition:background .3s,border-radius .3s}
+    .logo-wrap img{width:100%;height:auto;display:block}
 
-    /* ── WOD SECTION ── */
-    .wod-section { max-width: 540px; width: 100%; margin: 0 auto 2rem; }
-    .wod-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 0.75rem;
-      text-align: left;
+    /* ── BIG BADGE ── */
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:.75rem;
+      background:var(--orange);color:#fff;
+      font-family:'Bebas Neue',sans-serif;
+      font-size:clamp(1.1rem,3.5vw,1.8rem);
+      letter-spacing:.08em;
+      padding:.6rem 1.75rem;
+      margin-bottom:2rem;
+      clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);
+      animation:badge-pulse 3s ease-in-out infinite;
     }
-    .wod-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; flex-wrap: wrap; }
-    .wod-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--wod-name);
-      width: 100%;
-      max-width: 190px;
-      text-align: left;
-      flex-shrink: 0;
-      transition: color 0.35s;
-    }
-    @media (max-width: 400px) { .wod-name { max-width: 140px; font-size: 0.78rem; } }
-    .wod-bar-bg {
-      flex: 1;
-      min-width: 60px;
-      height: 5px;
-      background: var(--bar-bg);
-      border-radius: 3px;
-      overflow: hidden;
-      transition: background 0.35s;
-    }
-    .wod-bar-fill {
-      height: 100%;
-      background: var(--orange);
-      border-radius: 3px;
-      width: 0;
-      animation: fill-bar 2.5s ease-out forwards;
-    }
-    @keyframes fill-bar { to { width: var(--target-w); } }
-    .wod-pct {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.8rem;
-      color: var(--orange);
-      min-width: 32px;
-      text-align: right;
-      flex-shrink: 0;
-    }
+    @keyframes badge-pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,119,34,0)}50%{box-shadow:0 0 30px 8px rgba(232,119,34,0.35)}}
+    .hero-badge .live-dot{width:10px;height:10px;border-radius:50%;background:#fff;animation:live 1.2s ease-in-out infinite;flex-shrink:0}
+    @keyframes live{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
 
-    /* ── DIVIDER ── */
-    .divider { width: 50px; height: 2px; background: var(--orange); margin: 0 auto 1.75rem; opacity: 0.5; }
+    .hero-tagline{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,7vw,4.5rem);letter-spacing:.04em;color:var(--text);margin-bottom:.4rem;line-height:1}
+    .hero-tagline .hi{color:var(--orange)}
+    .hero-tagline .strike{text-decoration:line-through;opacity:.35}
 
-    /* ── CONTACT GRID ── */
-    .contact-section {
-      max-width: 540px;
-      width: 100%;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 0.75rem;
-    }
-    @media (max-width: 480px) { .contact-section { grid-template-columns: 1fr; } }
+    .hero-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(.8rem,2vw,1rem);letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:2.5rem}
 
-    .contact-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.1rem;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      transition: border-color 0.2s, background 0.35s, transform 0.2s;
-    }
-    .contact-card:hover { border-color: var(--orange); background: var(--orange-glow); transform: translateY(-2px); }
-    .cc-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-    .cc-value {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--text);
-      line-height: 1.35;
-      transition: color 0.35s;
-    }
-    .contact-card.instagram:hover { border-color: #E1306C; background: rgba(225,48,108,0.06); }
-    .contact-card.instagram .cc-value { color: #E1306C; }
-    .contact-card.location { grid-column: span 2; }
-    @media (max-width: 480px) { .contact-card.location { grid-column: span 1; } }
-    .contact-card.location .cc-value { font-size: 0.82rem; }
-    .ig-icon { width: 18px; height: 18px; margin-bottom: 0.2rem; }
+    /* ── STATS ── */
+    .stats-bar{display:flex;gap:0;flex-wrap:wrap;justify-content:center;margin-bottom:3rem;border:1px solid var(--border2);border-radius:4px;overflow:hidden}
+    .stat-item{display:flex;flex-direction:column;align-items:center;gap:.2rem;padding:.9rem 1.75rem;border-right:1px solid var(--border2);background:var(--bg2);transition:background .3s}
+    .stat-item:last-child{border-right:none}
+    .stat-item:hover{background:var(--bg3)}
+    .stat-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--orange);line-height:1}
+    .stat-label{font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text3)}
+    @media(max-width:480px){.stats-bar{border:none;gap:.5rem}.stat-item{border:1px solid var(--border2);border-radius:4px;padding:.75rem 1.25rem}.stat-item:last-child{border-right:1px solid var(--border2)}}
+
+    /* ── CTA ── */
+    .cta-group{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
+    .btn-primary{background:var(--orange);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 2rem;border-radius:3px;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
+    .btn-primary:hover{background:#c45e0e;transform:translateY(-2px)}
+    .btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border2);font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 2rem;border-radius:3px;text-decoration:none;cursor:pointer;transition:border-color .2s,color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
+    .btn-secondary:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-2px)}
+
+    /* ── SECTION ── */
+    .section-wrap{padding:4rem 1.5rem;max-width:700px;margin:0 auto}
+    .section-label{font-family:'Barlow Condensed',sans-serif;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:.4rem}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,6vw,3rem);letter-spacing:.03em;line-height:1;margin-bottom:1.25rem}
+    .section-body{color:var(--text2);font-size:.95rem;line-height:1.7;margin-bottom:1.5rem}
+    .section-divider{width:100%;height:1px;background:var(--border);margin:0}
+
+    /* ── WOD GENERATOR ── */
+    .wod-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.75rem;margin-bottom:1rem;transition:background .3s,border-color .3s;position:relative;overflow:hidden}
+    .wod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--orange)}
+    .wod-display{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,4vw,2rem);color:var(--orange);letter-spacing:.04em;line-height:1.35;min-height:4rem;display:flex;align-items:center;transition:opacity .2s}
+    .wod-meta{margin-top:.75rem;font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.1em;color:var(--text2);text-transform:uppercase}
+    .wod-meta span{color:var(--orange);margin-right:.5rem}
+    .wod-actions{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+    .wod-btn{background:transparent;border:1px solid var(--border2);color:var(--text2);font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1rem;border-radius:3px;cursor:pointer;transition:all .2s}
+    .wod-btn:hover{border-color:var(--orange);color:var(--orange)}
+    .wod-btn.hot{background:var(--orange);border-color:var(--orange);color:#fff}
+
+    /* ── EXCUSE ── */
+    .excuse-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.5rem 1.75rem;margin-bottom:1.25rem;transition:background .3s;position:relative;overflow:hidden}
+    .excuse-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:#E87722}
+    .excuse-text{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:1.05rem;color:var(--text2);margin-bottom:.75rem;min-height:2.5rem;transition:opacity .2s}
+    .reply-text{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;color:var(--orange);transition:opacity .2s}
+
+    /* ── COMMUNITY ── */
+    .community-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1rem;margin-bottom:1.5rem}
+    .community-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.25rem;transition:border-color .2s,background .2s,transform .2s}
+    .community-card:hover{border-color:var(--orange);background:var(--card-hover-bg);transform:translateY(-3px)}
+    .community-card .emoji{font-size:1.6rem;margin-bottom:.6rem}
+    .community-card h4{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.05em;color:var(--text);margin-bottom:.3rem}
+    .community-card p{font-size:.82rem;color:var(--text2);line-height:1.5}
+
+    /* ── PROGRESS ── */
+    .wod-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;flex-wrap:wrap}
+    .wod-name{font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:600;color:var(--text2);width:100%;max-width:200px;text-align:left;flex-shrink:0}
+    @media(max-width:400px){.wod-name{max-width:130px;font-size:.78rem}}
+    .wod-bar-bg{flex:1;min-width:60px;height:6px;background:var(--bar-bg);border-radius:3px;overflow:hidden;transition:background .3s}
+    .wod-bar-fill{height:100%;background:var(--orange);border-radius:3px;width:0;animation:fill-bar 2.5s ease-out forwards}
+    @keyframes fill-bar{to{width:var(--w)}}
+    .wod-pct{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;color:var(--orange);min-width:32px;text-align:right;flex-shrink:0}
+
+    /* ── CONTACT ── */
+    .contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+    @media(max-width:480px){.contact-grid{grid-template-columns:1fr}}
+    .contact-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.1rem;text-decoration:none;display:flex;flex-direction:column;gap:.3rem;transition:border-color .2s,background .2s,transform .2s}
+    .contact-card:hover{border-color:var(--orange);background:var(--card-hover-bg);transform:translateY(-2px)}
+    .cc-label{font-family:'Barlow Condensed',sans-serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text3)}
+    .cc-value{font-family:'Barlow Condensed',sans-serif;font-size:.95rem;font-weight:600;color:var(--text);line-height:1.35;transition:color .3s}
+    .contact-card.ig:hover{border-color:#E1306C;background:rgba(225,48,108,.05)}
+    .contact-card.ig .cc-value{color:#E1306C}
+    .contact-card.full{grid-column:span 2}
+    @media(max-width:480px){.contact-card.full{grid-column:span 1}}
+    .contact-card.full .cc-value{font-size:.82rem}
+    .ig-icon{width:18px;height:18px;margin-bottom:.2rem}
+
+    /* ── FREE TRIAL BOX ── */
+    .trial-box{margin-top:2rem;background:var(--orange);border-radius:6px;padding:2.25rem;text-align:center;position:relative;overflow:hidden}
+    .trial-box::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(60deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 40px)}
+    .trial-box h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,5vw,2.4rem);color:#fff;margin-bottom:.5rem;position:relative;z-index:1}
+    .trial-box p{font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(255,255,255,.85);margin-bottom:1.25rem;line-height:1.6;position:relative;z-index:1}
+    .btn-white{background:#fff;color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 2rem;border-radius:3px;text-decoration:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:transform .15s,box-shadow .15s;position:relative;z-index:1;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
+    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+
+    /* ── DROPS ── */
+    #drops{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+    .drop{position:absolute;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--orange);opacity:0;animation:sweat var(--dur) ease-in var(--del) infinite}
+    @keyframes sweat{0%{opacity:0;transform:translateY(0)}10%{opacity:.07}100%{opacity:0;transform:translateY(110vh)}}
 
     /* ── FOOTER ── */
-    .footer { margin-top: 2.5rem; font-size: 0.7rem; color: var(--footer); letter-spacing: 0.05em; transition: color 0.35s; }
+    footer{text-align:center;padding:2rem 1.5rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);border-top:1px solid var(--border);transition:border-color .3s,color .3s}
+    footer a{color:var(--orange);text-decoration:none}
 
-    /* ── FLOATING DROPS ── */
-    .drops { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-    .drop {
-      position: absolute;
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      background: var(--orange);
-      opacity: 0;
-      animation: sweat-drop var(--dur) ease-in var(--delay) infinite;
-    }
-    @keyframes sweat-drop {
-      0%   { opacity: 0; transform: translateY(0) scaleY(0.8); }
-      10%  { opacity: 0.1; }
-      100% { opacity: 0; transform: translateY(120vh) scaleY(1.3); }
-    }
+    /* ── REVEAL ── */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:400}
   </style>
 </head>
 <body>
+<canvas id="confetti"></canvas>
+<div id="drops"></div>
 
-  <div class="drops" id="drops"></div>
+<button class="theme-btn" id="themeBtn"><span id="themeIcon">☀️</span><span id="themeLabel">Light</span></button>
 
-  <!-- Theme toggle -->
-  <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">
-    <span class="icon" id="themeIcon">☀️</span>
-    <span id="themeLabel">Light</span>
-  </button>
+<!-- ══ TICKER ══ -->
+<div class="ticker-wrap">
+  <div class="ticker" id="ticker">
+    <!-- JS duplicates these for seamless loop -->
+  </div>
+</div>
 
-  <div class="wrapper">
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-slash-left"></div>
+  <div class="hero-slash-right"></div>
+  <div class="hero-stamp" aria-hidden="true">COMING SOON</div>
 
+  <div class="hero-inner">
     <div class="logo-wrap">
-      <img src="logos/logo.png" alt="CrossFit HITEC City Logo" />
+      <img src="logos/logo.png" alt="CrossFit HITEC City"/>
     </div>
 
-    <div class="badge">Website Under Construction — the box? Very much open. Come get wrecked.</div>
-
-    <div class="barbell-wrap">
-      <svg class="barbell" viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="14" y="18" width="16" height="44" rx="3" fill="#E87722"/>
-        <rect x="33" y="24" width="10" height="32" rx="2" fill="#E87722" opacity="0.75"/>
-        <rect x="260" y="18" width="16" height="44" rx="3" fill="#E87722"/>
-        <rect x="257" y="24" width="10" height="32" rx="2" fill="#E87722" opacity="0.75"/>
-        <rect x="43" y="36" width="214" height="8" rx="4" class="bar-shaft"/>
-        <rect x="47" y="30" width="13" height="20" rx="2" class="bar-collar"/>
-        <rect x="240" y="30" width="13" height="20" rx="2" class="bar-collar"/>
-        <line x1="134" y1="33" x2="134" y2="47" class="bar-knurl" stroke-width="1.5"/>
-        <line x1="145" y1="33" x2="145" y2="47" class="bar-knurl" stroke-width="1.5"/>
-        <line x1="150" y1="33" x2="150" y2="47" class="bar-knurl" stroke-width="1.5"/>
-        <line x1="155" y1="33" x2="155" y2="47" class="bar-knurl" stroke-width="1.5"/>
-        <line x1="166" y1="33" x2="166" y2="47" class="bar-knurl" stroke-width="1.5"/>
-      </svg>
+    <!-- BIG BADGE -->
+    <div class="hero-badge">
+      <span class="live-dot"></span>
+      Website Coming Soon &nbsp;·&nbsp; Box Very Much Open
     </div>
 
-    <div class="status-card">
-      <h3>📋 Coach's Report</h3>
-      <p>
-        The box? Open. The barbells? Loaded. The athletes? Suffering beautifully.
-        The <strong>website</strong> though? It's currently doing burpees. It started strong,
-        hit a wall at rep 47, and is now lying on the floor questioning its life choices.
-        <strong>ETA: when it stops crying.</strong>
-        In the meantime, find us on Instagram or drop us a message — we don't bite.
-        (The WODs do though.)
-      </p>
+    <h1 class="hero-tagline">
+      Fitness For <span class="hi">Everyone.</span><br>
+      Excuses For <span class="strike">No One.</span>
+    </h1>
+    <p class="hero-sub">Official CrossFit Affiliate &nbsp;·&nbsp; ITPH CapitaLand HITEC City &nbsp;·&nbsp; Hyderabad</p>
+
+    <div class="stats-bar">
+      <div class="stat-item"><div class="stat-num" id="followerCount">0</div><div class="stat-label">Followers</div></div>
+      <div class="stat-item"><div class="stat-num" id="postCount">0</div><div class="stat-label">Posts</div></div>
+      <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Burpees Done</div></div>
+      <div class="stat-item"><div class="stat-num">0</div><div class="stat-label">Excuses Accepted</div></div>
     </div>
 
-    <div class="wod-section">
-      <div class="wod-label">Today's WOD: Build a Website (the box is already built, relax)</div>
-      <div class="wod-row">
-        <div class="wod-name">Design ✅</div>
-        <div class="wod-bar-bg"><div class="wod-bar-fill" style="--target-w:100%;animation-duration:1.2s;"></div></div>
-        <div class="wod-pct">100%</div>
-      </div>
-      <div class="wod-row">
-        <div class="wod-name">Branding ✅</div>
-        <div class="wod-bar-bg"><div class="wod-bar-fill" style="--target-w:90%;animation-duration:1.6s;"></div></div>
-        <div class="wod-pct">90%</div>
-      </div>
-      <div class="wod-row">
-        <div class="wod-name">Content Writing 🥵</div>
-        <div class="wod-bar-bg"><div class="wod-bar-fill" style="--target-w:60%;animation-duration:2s;"></div></div>
-        <div class="wod-pct">60%</div>
-      </div>
-      <div class="wod-row">
-        <div class="wod-name">Convincing Coach 😅</div>
-        <div class="wod-bar-bg"><div class="wod-bar-fill" style="--target-w:30%;animation-duration:2.5s;"></div></div>
-        <div class="wod-pct">30%</div>
-      </div>
-      <div class="wod-row">
-        <div class="wod-name">Going Live 😵</div>
-        <div class="wod-bar-bg"><div class="wod-bar-fill" style="--target-w:5%;animation-duration:3s;"></div></div>
-        <div class="wod-pct">5%</div>
-      </div>
+    <div class="cta-group">
+      <a class="btn-primary" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">📲 DM for Free Trial</a>
+      <a class="btn-secondary" href="tel:+919811176700">📞 Call Us</a>
     </div>
+  </div>
+</div>
 
-    <div class="divider"></div>
+<div class="section-divider"></div>
 
-    <div style="margin-bottom:0.9rem;">
-      <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);">Don't wait for the site — reach us now</p>
+<!-- ══ WOD GENERATOR ══ -->
+<div class="section-wrap reveal">
+  <div class="section-label">Interactive</div>
+  <div class="section-title">Today's WOD Generator</div>
+  <p class="section-body">Can't make it to the box? Here's a random WOD to torture yourself with at home. You're welcome.</p>
+  <div class="wod-card">
+    <div class="wod-display" id="wodDisplay">Hit "Generate" to find out what suffering awaits you today.</div>
+    <div class="wod-meta" id="wodMeta"></div>
+    <div class="wod-actions">
+      <button class="wod-btn hot" onclick="generateWOD()">🎲 Generate WOD</button>
+      <button class="wod-btn" id="scaleBtn" onclick="scaleWOD()" style="display:none">📉 Scale it (coward mode)</button>
+      <button class="wod-btn" id="rxBtn" onclick="rxWOD()" style="display:none">💀 RX (send help)</button>
     </div>
+  </div>
+  <p style="font-size:.78rem;color:var(--text3);font-family:'Barlow Condensed',sans-serif;letter-spacing:.05em;text-align:center">⚠️ Side effects: lying on the floor, questioning your choices, and coming back tomorrow.</p>
+</div>
 
-    <div class="contact-section">
-      <a class="contact-card" href="tel:+919811176700">
-        <div class="cc-label">📞 Call / WhatsApp</div>
-        <div class="cc-value">+91 98111 76700</div>
-      </a>
-      <a class="contact-card instagram" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">
-        <svg class="ig-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="20" height="20" rx="6" stroke="#E1306C" stroke-width="2"/>
-          <circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="2"/>
-          <circle cx="17.5" cy="6.5" r="1" fill="#E1306C"/>
-        </svg>
-        <div class="cc-label">Instagram</div>
-        <div class="cc-value">@crossfithiteccity</div>
-      </a>
-      <a class="contact-card location" href="https://share.google/ez5UWl0daaJvxQwB5" target="_blank" rel="noopener">
-        <div class="cc-label">📍 Find Us — CrossFit HITEC City</div>
-        <div class="cc-value">First Floor, East Wing, Block A, International Tech Park Hyderabad, Survey No. 64/2, Plot 17, Hyderabad, Telangana 500081</div>
-      </a>
-    </div>
+<div class="section-divider"></div>
 
-    <div class="footer">© CrossFit HITEC City · All reps reserved · No excuses</div>
+<!-- ══ EXCUSE BUSTER ══ -->
+<div class="section-wrap reveal">
+  <div class="section-label">The Classic</div>
+  <div class="section-title">Excuse Buster 3000™</div>
+  <p class="section-body">We've heard them all. Every. Single. One. Hit the button and watch your excuse crumble in real time.</p>
+  <div class="excuse-card">
+    <div class="excuse-text" id="excuseText">Click below and confess your excuse...</div>
+    <div class="reply-text" id="replyText"></div>
+  </div>
+  <div style="display:flex;justify-content:center">
+    <button class="btn-primary" onclick="bustExcuse()">😬 I have an excuse...</button>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══ COMMUNITY ══ -->
+<div class="section-wrap reveal">
+  <div class="section-label">Why CFHC</div>
+  <div class="section-title">More Than a Gym</div>
+  <p class="section-body">We're an official CrossFit affiliate in the heart of HITEC City. Whether you're a first-timer or a seasoned athlete, you'll find your place here.</p>
+  <div class="community-grid">
+    <div class="community-card"><div class="emoji">🏋️</div><h4>Free Trial</h4><p>First class free. DM us on Instagram or call to book your slot.</p></div>
+    <div class="community-card"><div class="emoji">💪</div><h4>All Levels</h4><p>Beginner to beast mode — every WOD is scaled to where you're at.</p></div>
+    <div class="community-card"><div class="emoji">🤝</div><h4>Strong Community</h4><p>The only place where strangers cheer you through your last rep.</p></div>
+    <div class="community-card"><div class="emoji">🗓️</div><h4>Strong Saturdays</h4><p>Our legendary team WODs. You'll hate it. You'll love it. You'll be back.</p></div>
+    <div class="community-card"><div class="emoji">📍</div><h4>Prime Location</h4><p>Right inside ITPH CapitaLand — no excuse if you work in HITEC City.</p></div>
+    <div class="community-card"><div class="emoji">✅</div><h4>Official Affiliate</h4><p>Certified CrossFit programming. Real coaches. Real results.</p></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══ PROGRESS ══ -->
+<div class="section-wrap reveal">
+  <div class="section-label">Status Update</div>
+  <div class="section-title">Website WOD</div>
+  <p class="section-body">Our website is a work in progress. Like any good CrossFitter — it started strong, hit a wall, and is currently on the floor breathing.</p>
+  <div class="wod-row"><div class="wod-name">Design ✅</div><div class="wod-bar-bg"><div class="wod-bar-fill" style="--w:100%;animation-duration:1.2s"></div></div><div class="wod-pct">100%</div></div>
+  <div class="wod-row"><div class="wod-name">Branding ✅</div><div class="wod-bar-bg"><div class="wod-bar-fill" style="--w:90%;animation-duration:1.5s"></div></div><div class="wod-pct">90%</div></div>
+  <div class="wod-row"><div class="wod-name">Content Writing 🥵</div><div class="wod-bar-bg"><div class="wod-bar-fill" style="--w:65%;animation-duration:2s"></div></div><div class="wod-pct">65%</div></div>
+  <div class="wod-row"><div class="wod-name">Convincing Coach 😅</div><div class="wod-bar-bg"><div class="wod-bar-fill" style="--w:35%;animation-duration:2.5s"></div></div><div class="wod-pct">35%</div></div>
+  <div class="wod-row"><div class="wod-name">Going Live 😵</div><div class="wod-bar-bg"><div class="wod-bar-fill" style="--w:5%;animation-duration:3s"></div></div><div class="wod-pct">5%</div></div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══ CONTACT ══ -->
+<div class="section-wrap reveal">
+  <div class="section-label">Don't Wait</div>
+  <div class="section-title">Reach Us Now</div>
+  <p class="section-body">The website isn't ready. The box is. Come in, say hi, get humbled.</p>
+  <div class="contact-grid">
+    <a class="contact-card" href="tel:+919811176700"><div class="cc-label">📞 Call / WhatsApp</div><div class="cc-value">+91 98111 76700</div></a>
+    <a class="contact-card ig" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">
+      <svg class="ig-icon" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#E1306C" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C"/></svg>
+      <div class="cc-label">Instagram</div><div class="cc-value">@crossfithiteccity</div>
+    </a>
+    <a class="contact-card full" href="https://share.google/ez5UWl0daaJvxQwB5" target="_blank" rel="noopener"><div class="cc-label">📍 CrossFit HITEC City · Get Directions</div><div class="cc-value">First Floor East Wing Block A, International Tech Park Hyderabad, Survey No. 64/2, Plot 17, Madhapur, Hyderabad 500081</div></a>
   </div>
 
-  <script>
-    // Floating sweat drops
-    const drops = document.getElementById('drops');
-    for (let i = 0; i < 16; i++) {
-      const d = document.createElement('div');
-      d.classList.add('drop');
-      const h = Math.random() * 9 + 4;
-      d.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*-15}%;height:${h}px;width:${Math.random()*1.5+1.2}px;--dur:${Math.random()*5+5}s;--delay:${Math.random()*8}s;`;
-      drops.appendChild(d);
-    }
+  <div class="trial-box">
+    <h3>Ready to Stop Scrolling and Start Lifting?</h3>
+    <p>Your first class is on us. DM us on Instagram or call to book your free trial session. No experience needed — just show up.</p>
+    <a class="btn-white" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener" onclick="fireConfetti()">🔥 Book My Free Trial</a>
+  </div>
+</div>
 
-    // Theme toggle — respects OS preference on first load
-    const html = document.documentElement;
-    const btn   = document.getElementById('themeBtn');
-    const icon  = document.getElementById('themeIcon');
-    const label = document.getElementById('themeLabel');
+<footer>© CrossFit HITEC City · All Reps Reserved · No Excuses · <a href="https://instagram.com/crossfithiteccity" target="_blank">@crossfithiteccity</a></footer>
 
-    const saved = localStorage.getItem('cf-theme');
-    const osDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let dark = saved ? saved === 'dark' : osDark;
+<script>
+// THEME
+const html=document.documentElement,themeBtn=document.getElementById('themeBtn');
+const themeIcon=document.getElementById('themeIcon'),themeLabel=document.getElementById('themeLabel');
+let dark=localStorage.getItem('cf-theme')?localStorage.getItem('cf-theme')==='dark':window.matchMedia('(prefers-color-scheme:dark)').matches;
+function applyTheme(d){html.setAttribute('data-theme',d?'dark':'light');themeIcon.textContent=d?'☀️':'🌙';themeLabel.textContent=d?'Light':'Dark';localStorage.setItem('cf-theme',d?'dark':'light')}
+applyTheme(dark);themeBtn.addEventListener('click',()=>{dark=!dark;applyTheme(dark)});
 
-    function apply(isDark) {
-      html.setAttribute('data-theme', isDark ? 'dark' : 'light');
-      icon.textContent  = isDark ? '☀️' : '🌙';
-      label.textContent = isDark ? 'Light' : 'Dark';
-      localStorage.setItem('cf-theme', isDark ? 'dark' : 'light');
-    }
+// TICKER
+const items=['🔥 Website Coming Soon','✅ Box Very Much Open','📲 DM for Free Trial','💪 Fitness For Everyone','🧡 Official CrossFit Affiliate','🗓️ Strong Saturdays','📍 ITPH CapitaLand HITEC City','😤 No Excuses'];
+const tickerEl=document.getElementById('ticker');
+const full=[...items,...items].map(t=>`<span class="ticker-item">${t}<span class="ticker-sep">·</span></span>`).join('');
+tickerEl.innerHTML=full+full;
 
-    apply(dark);
-    btn.addEventListener('click', () => { dark = !dark; apply(dark); });
-  </script>
+// DROPS
+const dropsEl=document.getElementById('drops');
+for(let i=0;i<20;i++){const d=document.createElement('div');d.className='drop';const h=Math.random()*10+4;d.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*-20}%;height:${h}px;width:${Math.random()*2+1}px;--dur:${Math.random()*6+5}s;--del:${Math.random()*10}s`;dropsEl.appendChild(d)}
+
+// COUNTERS
+function animateCount(el,target,dur){let s=0,step=target/(dur/16);const iv=setInterval(()=>{s=Math.min(s+step,target);el.textContent=Math.floor(s).toLocaleString();if(s>=target)clearInterval(iv)},16)}
+setTimeout(()=>{animateCount(document.getElementById('followerCount'),2497,1800);animateCount(document.getElementById('postCount'),380,1400)},500);
+
+// WOD GENERATOR
+const wods=[
+  {name:"AMRAP 20",desc:"5 Pull-ups · 10 Push-ups · 15 Air Squats",type:"Bodyweight",emoji:"🔥"},
+  {name:"For Time",desc:"21-15-9 Thrusters (42.5/30kg) · Pull-ups",type:"Classic: Fran",emoji:"💀"},
+  {name:"EMOM 16",desc:"Odd: 10 KB Swings · Even: 10 Box Jumps (60/50cm)",type:"Conditioning",emoji:"⚡"},
+  {name:"5 Rounds For Time",desc:"400m Run · 15 Deadlifts (100/70kg) · 20 Wall Balls",type:"Grunt Work",emoji:"😤"},
+  {name:"AMRAP 12",desc:"3 Muscle-Ups · 6 Squat Cleans (70/50kg) · 9 Toes-to-Bar",type:"Skill+Strength",emoji:"🏆"},
+  {name:"For Time",desc:"1K Row · 50 Burpees · 1K Run · 50 Burpees · 1K Row",type:"Suffer Fest™",emoji:"🫠"},
+  {name:"EMOM 20",desc:"1: 5 Heavy Back Squats · 2: 10 Ring Dips · 3: 15 GHD Sit-ups · 4: Rest",type:"Strength+Skill",emoji:"💪"},
+  {name:"7 Rounds For Time",desc:"7 Handstand Push-ups · 7 Power Cleans (60/42.5kg) · 7 Bar-Facing Burpees",type:"Hero WOD Vibes",emoji:"🫡"},
+  {name:"Tabata",desc:"8 Rounds: 20s Max Effort Rowing · 10s Rest (Score = total cals)",type:"Sprint",emoji:"🚣"},
+  {name:"Strong Saturday Special 🧡",desc:"In teams of 2: 100 Synchro Wall Balls · 80 Partner Deadlifts · 60 Synchro Box Jumps · 40 Partner KB Swings · 20 Rope Climbs",type:"Team WOD",emoji:"🤝"},
+];
+const scaled=["Half the reps, half the weight, full the pride.","Ring rows instead of pull-ups. We see you. We support you.","Box squats. Half weight. Extra smiles.","Cut the run to 200m. You showed up. That's enough.","30min cap. The clock is your friend today."];
+const rx=["Add 10kg. Halve the rest. Double the suffering.","RX+ means you do it again immediately after.","No chalk. Wet hands. That's the real RX.","Time cap? There is no time cap for the brave.","RX is just the beginning. Real champs go for RX+2."];
+function generateWOD(){
+  const wod=wods[Math.floor(Math.random()*wods.length)];
+  const d=document.getElementById('wodDisplay');d.style.opacity=0;
+  setTimeout(()=>{d.textContent=`${wod.emoji} ${wod.name}: ${wod.desc}`;d.style.opacity=1},200);
+  document.getElementById('wodMeta').innerHTML=`<span>Type:</span>${wod.type}`;
+  document.getElementById('scaleBtn').style.display='inline-flex';
+  document.getElementById('rxBtn').style.display='inline-flex';
+  document.querySelector('.wod-btn.hot').textContent='🎲 Another One';
+}
+function scaleWOD(){document.getElementById('wodMeta').innerHTML=`<span>Scaled:</span>${scaled[Math.floor(Math.random()*scaled.length)]}`}
+function rxWOD(){document.getElementById('wodMeta').innerHTML=`<span>RX Note:</span>${rx[Math.floor(Math.random()*rx.length)]}`}
+
+// EXCUSE BUSTER
+const excuses=[
+  ["I'm too tired after work.","So are we. We come anyway. See you at 6am."],
+  ["I don't know how to do CrossFit.","Nobody did. Now they deadlift twice their bodyweight. First class is free."],
+  ["It's too expensive.","One EMI missed on that phone upgrade = 2 months of CrossFit. Think about it."],
+  ["I need to get fit before I start.","That's like washing dishes before putting them in the dishwasher."],
+  ["I'm scared of getting injured.","Sitting at a desk 9 hours a day is also an injury. Just slower."],
+  ["My friends aren't into it.","They will be. After they see the transformation. Or they won't. Come alone."],
+  ["I don't have time.","You have time for Instagram Reels. You have time. We're just saying."],
+  ["I tried CrossFit and it was too hard.","Good. Hard things make you better. The second class is easier. DM us."],
+  ["I'll start on Monday.","Classic. Monday called. It says stop using it as a scapegoat."],
+  ["I'm not the gym type.","Neither was our athlete who arrived in office clothes. He coaches here now."],
+];
+function bustExcuse(){
+  const [ex,reply]=excuses[Math.floor(Math.random()*excuses.length)];
+  const et=document.getElementById('excuseText'),rt=document.getElementById('replyText');
+  et.style.transition='opacity .18s';rt.style.transition='opacity .18s';
+  et.style.opacity=0;rt.style.opacity=0;
+  setTimeout(()=>{et.textContent=`"${ex}"`;rt.textContent=`→ ${reply}`;et.style.opacity=1;rt.style.opacity=1},200);
+}
+
+// CONFETTI
+const canvas=document.getElementById('confetti'),ctx=canvas.getContext('2d');
+let particles=[];
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+resizeCanvas();window.addEventListener('resize',resizeCanvas);
+function fireConfetti(){
+  const colors=['#E87722','#fff','#FF2E2E','#FFD700','#FF6B35'];
+  for(let i=0;i<140;i++)particles.push({x:Math.random()*canvas.width,y:-10,vx:(Math.random()-.5)*7,vy:Math.random()*4+2,color:colors[Math.floor(Math.random()*colors.length)],size:Math.random()*9+4,rotation:Math.random()*360,rotSpeed:(Math.random()-.5)*8,life:1,decay:Math.random()*.015+.007});
+  if(!animating)animate();
+}
+let animating=false;
+function animate(){
+  animating=true;ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles=particles.filter(p=>p.life>0);
+  particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.1;p.rotation+=p.rotSpeed;p.life-=p.decay;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rotation*Math.PI/180);ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.color;ctx.fillRect(-p.size/2,-p.size/4,p.size,p.size/2);ctx.restore()});
+  if(particles.length>0)requestAnimationFrame(animate);else animating=false;
+}
+
+// SCROLL REVEAL
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
+reveals.forEach(r=>obs.observe(r));
+</script>
 </body>
 </html>
