@@ -19,12 +19,13 @@
       --ticker-bg:#E87722;--ticker-text:#fff;
       --slash-color:rgba(232,119,34,0.06);
       --stamp-color:rgba(232,119,34,0.07);
+      --orange-glow:rgba(232,119,34,0.18);
     }
     [data-theme="light"]{
       --bg:#EEE8DF;--bg2:#fff;--bg3:#f5f0ea;
       --border:#DDD5C8;--border2:#C8BEB2;
       --text:#151515;--text2:#666;--text3:#AAA;
-      --bar-bg:#DDD5C8;--logo-wrap-bg:#1a1a1a;--logo-wrap-r:14px;
+      --bar-bg:#DDD5C8;--logo-wrap-bg:transparent;--logo-wrap-r:14px;
       --card-hover-bg:rgba(232,119,34,0.06);
       --ticker-bg:#E87722;--ticker-text:#fff;
       --slash-color:rgba(232,119,34,0.08);
@@ -51,7 +52,7 @@
     /* diagonal slash bg */
     .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(60deg,var(--slash-color) 0px,var(--slash-color) 1px,transparent 1px,transparent 60px);pointer-events:none;z-index:0}
     /* orange glow blob */
-    .hero::after{content:'';position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,var(--orange-glow) 0%,transparent 70%);pointer-events:none;z-index:0}
+    .hero::after{content:'';position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:760px;height:520px;background:radial-gradient(ellipse,var(--orange-glow) 0%,transparent 60%);pointer-events:none;z-index:0}
 
     /* big COMING SOON watermark */
     .hero-stamp{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,18vw,14rem);color:var(--stamp-color);letter-spacing:.1em;user-select:none;pointer-events:none;z-index:0;white-space:nowrap;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-8deg)}
@@ -77,7 +78,7 @@
       clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);
       animation:badge-pulse 3s ease-in-out infinite;
     }
-    @keyframes badge-pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,119,34,0)}50%{box-shadow:0 0 30px 8px rgba(232,119,34,0.35)}}
+    @keyframes badge-pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,119,34,0)}50%{box-shadow:0 0 30px 8px rgba(232,119,34,0.45)}}
     .hero-badge .live-dot{width:10px;height:10px;border-radius:50%;background:#fff;animation:live 1.2s ease-in-out infinite;flex-shrink:0}
     @keyframes live{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
 
