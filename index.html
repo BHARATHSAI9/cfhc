@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrossFit HITEC City — Coming Soon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #E87722;
+      --orange-glow: rgba(232,119,34,0.12);
+    }
+
+    /* ── DARK THEME (default) ── */
+    [data-theme="dark"] {
+      --bg:        #060606;
+      --bg-card:   #161616;
+      --border:    #222222;
+      --text:      #F4F4F4;
+      --text-muted:#aaaaaa;
+      --text-dim:  #555555;
+      --footer:    #2e2e2e;
+      --bar-bg:    #222222;
+      --wod-name:  #777777;
+      --glow-color: rgba(232,119,34,0.07);
+      --logo-bg:   transparent;
+      --logo-radius: 0;
+    }
+
+    /* ── LIGHT THEME ── */
+    [data-theme="light"] {
+      --bg:        #F2EDE8;
+      --bg-card:   #FFFFFF;
+      --border:    #E0D8D0;
+      --text:      #1A1A1A;
+      --text-muted:#666666;
+      --text-dim:  #AAAAAA;
+      --footer:    #CCCCCC;
+      --bar-bg:    #E0D8D0;
+      --wod-name:  #999999;
+      --glow-color: rgba(232,119,34,0.10);
+      --logo-bg:   #1A1A1A;
+      --logo-radius: 16px;
+    }
+
+    /* Auto-detect OS preference on first load */
+    @media (prefers-color-scheme: light) {
+      html:not([data-theme]) { --bg:#F2EDE8; --bg-card:#FFFFFF; --border:#E0D8D0; --text:#1A1A1A; --text-muted:#666; --text-dim:#AAA; --footer:#CCC; --bar-bg:#E0D8D0; --wod-name:#999; --glow-color:rgba(232,119,34,0.10); --logo-bg:#1A1A1A; --logo-radius:16px; }
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, var(--glow-color) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      transition: background 0.35s ease;
+    }
+
+    /* ── THEME TOGGLE ── */
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 100;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.4rem 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s, background 0.35s;
+    }
+    .theme-toggle:hover { border-color: var(--orange); color: var(--orange); }
+    .theme-toggle .icon { font-size: 0.9rem; line-height: 1; }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem 2rem;
+      text-align: center;
+    }
+
+    /* ── LOGO ── */
+    .logo-wrap {
+      width: min(400px, 85vw);
+      margin-bottom: 0.25rem;
+      background: var(--logo-bg);
+      border-radius: var(--logo-radius);
+      padding: 0.5rem;
+      transition: background 0.35s ease, border-radius 0.35s ease;
+    }
+    .logo-wrap img { width: 100%; height: auto; display: block; }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-block;
+      background: transparent;
+      border: 1px solid var(--orange);
+      color: var(--orange);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      animation: pulse-badge 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse-badge { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+    /* ── BARBELL ── */
+    .barbell-wrap { margin: 0 auto 1.75rem; width: min(300px, 82vw); }
+    .barbell { animation: lift 1.7s cubic-bezier(0.4,0,0.2,1) infinite; transform-origin: center bottom; }
+    @keyframes lift {
+      0%   { transform: translateY(0px) rotate(0deg); }
+      30%  { transform: translateY(-16px) rotate(-1.5deg); }
+      50%  { transform: translateY(-20px) rotate(0deg); }
+      70%  { transform: translateY(-16px) rotate(1.5deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    .bar-shaft { fill: var(--bar-bg); transition: fill 0.35s; }
+    .bar-collar { fill: var(--border); transition: fill 0.35s; }
+    .bar-knurl  { stroke: var(--wod-name); transition: stroke 0.35s; }
+
+    /* ── STATUS CARD ── */
+    .status-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--orange);
+      border-radius: 4px;
+      padding: 1.4rem 1.75rem;
+      max-width: 540px;
+      width: 100%;
+      margin: 0 auto 2rem;
+      text-align: left;
+      transition: background 0.35s, border-color 0.35s;
+    }
+    .status-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.65rem;
+    }
+    .status-card p { font-size: 0.95rem; line-height: 1.65; color: var(--text-muted); }
+    .status-card p strong { color: var(--text); }
+
+    /* ── WOD SECTION ── */
+    .wod-section { max-width: 540px; width: 100%; margin: 0 auto 2rem; }
+    .wod-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+      text-align: left;
+    }
+    .wod-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.55rem; flex-wrap: wrap; }
+    .wod-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--wod-name);
+      width: 100%;
+      max-width: 190px;
+      text-align: left;
+      flex-shrink: 0;
+      transition: color 0.35s;
+    }
+    @media (max-width: 400px) { .wod-name { max-width: 140px; font-size: 0.78rem; } }
+    .wod-bar-bg {
+      flex: 1;
+      min-width: 60px;
+      height: 5px;
+      background: var(--bar-bg);
+      border-radius: 3px;
+      overflow: hidden;
+      transition: background 0.35s;
+    }
+    .wod-bar-fill {
+      height: 100%;
+      background: var(--orange);
+      border-radius: 3px;
+      width: 0;
+      animation: fill-bar 2.5s ease-out forwards;
+    }
+    @keyframes fill-bar { to { width: var(--target-w); } }
+    .wod-pct {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      color: var(--orange);
+      min-width: 32px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── DIVIDER ── */
+    .divider { width: 50px; height: 2px; background: var(--orange); margin: 0 auto 1.75rem; opacity: 0.5; }
+
+    /* ── CONTACT GRID ── */
+    .contact-section {
+      max-width: 540px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 0.75rem;
+    }
+    @media (max-width: 480px) { .contact-section { grid-template-columns: 1fr; } }
+
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.1rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      transition: border-color 0.2s, background 0.35s, transform 0.2s;
+    }
+    .contact-card:hover { border-color: var(--orange); background: var(--orange-glow); transform: translateY(-2px); }
+    .cc-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .cc-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+      transition: color 0.35s;
+    }
+    .contact-card.instagram:hover { border-color: #E1306C; background: rgba(225,48,108,0.06); }
+    .contact-card.instagram .cc-value { color: #E1306C; }
+    .contact-card.location { grid-column: span 2; }
+    @media (max-width: 480px) { .contact-card.location { grid-column: span 1; } }
+    .contact-card.location .cc-value { font-size: 0.82rem; }
+    .ig-icon { width: 18px; height: 18px; margin-bottom: 0.2rem; }
+
+    /* ── FOOTER ── */
+    .footer { margin-top: 2.5rem; font-size: 0.7rem; color: var(--footer); letter-spacing: 0.05em; transition: color 0.35s; }
+
+    /* ── FLOATING DROPS ── */
+    .drops { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .drop {
+      position: absolute;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      background: var(--orange);
+      opacity: 0;
+      animation: sweat-drop var(--dur) ease-in var(--delay) infinite;
+    }
+    @keyframes sweat-drop {
+      0%   { opacity: 0; transform: translateY(0) scaleY(0.8); }
+      10%  { opacity: 0.1; }
+      100% { opacity: 0; transform: translateY(120vh) scaleY(1.3); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="drops" id="drops"></div>
+
+  <!-- Theme toggle -->
+  <button class="theme-toggle" id="themeBtn" aria-label="Toggle theme">
+    <span class="icon" id="themeIcon">☀️</span>
+    <span id="themeLabel">Light</span>
+  </button>
+
+  <div class="wrapper">
+
+    <div class="logo-wrap">
+      <img src="logo.png" alt="CrossFit HITEC City Logo" />
+    </div>
+
+    <div class="badge">Website Under Construction — the box? Very much open. Come get wrecked.</div>
+
+    <div class="barbell-wrap">
+      <svg class="barbell" viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="14" y="18" width="16" height="44" rx="3" fill="#E87722"/>
+        <rect x="33" y="24" width="10" height="32" rx="2" fill="#E87722" opacity="0.75"/>
+        <rect x="260" y="18" width="16" height="44" rx="3" fill="#E87722"/>
+        <rect x="257" y="24" width="10" height="32" rx="2" fill="#E87722" opacity="0.75"/>
+        <rect x="43" y="36" width="214" height="8" rx="4" class="bar-shaft"/>
+        <rect x="47" y="30" width="13" height="20" rx="2" class="bar-collar"/>
+        <rect x="240" y="30" width="13" height="20" rx="2" class="bar-collar"/>
+        <line x1="134" y1="33" x2="134" y2="47" class="bar-knurl" stroke-width="1.5"/>
+        <line x1="145" y1="33" x2="145" y2="47" class="bar-knurl" stroke-width="1.5"/>
+        <line x1="150" y1="33" x2="150" y2="47" class="bar-knurl" stroke-width="1.5"/>
+        <line x1="155" y1="33" x2="155" y2="47" class="bar-knurl" stroke-width="1.5"/>
+        <line x1="166" y1="33" x2="166" y2="47" class="bar-knurl" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <div class="status-card">
+      <h3>📋 Coach's Report</h3>
+      <p>
+        The box? Open. The barbells? Loaded. The athletes? Suffering beautifully.
+        The <strong>website</strong> though? It's currently doing burpees. It started strong,
+        hit a wall at rep 47, and is now lying on the floor questioning its life choices.
+        <strong>ETA: when it stops crying.</strong>
+        In the meantime, find us on Instagram or drop us a message — we don't bite.
+        (The WODs do though.)
+      </p>
+    </div>
+
+    <div class="wod-section">
+      <div class="wod-label">Today's WOD: Build a Website (the box is already built, relax)</div>
+      <div class="wod-row">
+        <div class="wod-name">Design ✅</div>
+        <div class="wod-bar-bg"><div class="wod-bar-fill" style="--target-w:100%;animation-duration:1.2s;"></div></div>
+        <div class="wod-pct">100%</div>
+      </div>
+      <div class="wod-row">
+        <div class="wod-name">Branding ✅</div>
+        <div class="wod-bar-bg"><div class="wod-bar-fill" style="--target-w:90%;animation-duration:1.6s;"></div></div>
+        <div class="wod-pct">90%</div>
+      </div>
+      <div class="wod-row">
+        <div class="wod-name">Content Writing 🥵</div>
+        <div class="wod-bar-bg"><div class="wod-bar-fill" style="--target-w:60%;animation-duration:2s;"></div></div>
+        <div class="wod-pct">60%</div>
+      </div>
+      <div class="wod-row">
+        <div class="wod-name">Convincing Coach 😅</div>
+        <div class="wod-bar-bg"><div class="wod-bar-fill" style="--target-w:30%;animation-duration:2.5s;"></div></div>
+        <div class="wod-pct">30%</div>
+      </div>
+      <div class="wod-row">
+        <div class="wod-name">Going Live 😵</div>
+        <div class="wod-bar-bg"><div class="wod-bar-fill" style="--target-w:5%;animation-duration:3s;"></div></div>
+        <div class="wod-pct">5%</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div style="margin-bottom:0.9rem;">
+      <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);">Don't wait for the site — reach us now</p>
+    </div>
+
+    <div class="contact-section">
+      <a class="contact-card" href="tel:+919811176700">
+        <div class="cc-label">📞 Call / WhatsApp</div>
+        <div class="cc-value">+91 98111 76700</div>
+      </a>
+      <a class="contact-card instagram" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">
+        <svg class="ig-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="6" stroke="#E1306C" stroke-width="2"/>
+          <circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="2"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="#E1306C"/>
+        </svg>
+        <div class="cc-label">Instagram</div>
+        <div class="cc-value">@crossfithiteccity</div>
+      </a>
+      <a class="contact-card location" href="https://share.google/ez5UWl0daaJvxQwB5" target="_blank" rel="noopener">
+        <div class="cc-label">📍 Find Us — CrossFit HITEC City</div>
+        <div class="cc-value">First Floor, East Wing, Block A, International Tech Park Hyderabad, Survey No. 64/2, Plot 17, Hyderabad, Telangana 500081</div>
+      </a>
+    </div>
+
+    <div class="footer">© CrossFit HITEC City · All reps reserved · No excuses</div>
+  </div>
+
+  <script>
+    // Floating sweat drops
+    const drops = document.getElementById('drops');
+    for (let i = 0; i < 16; i++) {
+      const d = document.createElement('div');
+      d.classList.add('drop');
+      const h = Math.random() * 9 + 4;
+      d.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*-15}%;height:${h}px;width:${Math.random()*1.5+1.2}px;--dur:${Math.random()*5+5}s;--delay:${Math.random()*8}s;`;
+      drops.appendChild(d);
+    }
+
+    // Theme toggle — respects OS preference on first load
+    const html = document.documentElement;
+    const btn   = document.getElementById('themeBtn');
+    const icon  = document.getElementById('themeIcon');
+    const label = document.getElementById('themeLabel');
+
+    const saved = localStorage.getItem('cf-theme');
+    const osDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let dark = saved ? saved === 'dark' : osDark;
+
+    function apply(isDark) {
+      html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      icon.textContent  = isDark ? '☀️' : '🌙';
+      label.textContent = isDark ? 'Light' : 'Dark';
+      localStorage.setItem('cf-theme', isDark ? 'dark' : 'light');
+    }
+
+    apply(dark);
+    btn.addEventListener('click', () => { dark = !dark; apply(dark); });
+  </script>
+</body>
+</html>
