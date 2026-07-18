@@ -13,7 +13,6 @@
   --card-hover-bg:rgba(232,119,34,0.07);
   --ticker-bg:#E87722;--ticker-text:#fff;
   --slash-color:rgba(232,119,34,0.06);
-  --stamp-color:rgba(232,119,34,0.07);
   --orange-glow:rgba(232,119,34,0.18);
 }
 [data-theme="light"]{
@@ -24,7 +23,6 @@
   --card-hover-bg:rgba(232,119,34,0.06);
   --ticker-bg:#E87722;--ticker-text:#fff;
   --slash-color:rgba(232,119,34,0.08);
-  --stamp-color:rgba(232,119,34,0.08);
 }
 
 html{scroll-behavior:smooth}
@@ -49,9 +47,6 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 /* orange glow blob */
 .hero::after{content:'';position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:760px;height:520px;background:radial-gradient(ellipse,var(--orange-glow) 0%,transparent 60%);pointer-events:none;z-index:0}
 
-/* big COMING SOON watermark */
-.hero-stamp{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,18vw,14rem);color:var(--stamp-color);letter-spacing:.1em;user-select:none;pointer-events:none;z-index:0;white-space:nowrap;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-8deg)}
-
 /* orange side-slash accent */
 .hero-slash-left{position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--orange);z-index:1}
 .hero-slash-right{position:absolute;right:0;top:0;bottom:0;width:5px;background:var(--orange);z-index:1}
@@ -64,21 +59,6 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 /* removed shadows; keep subtle hover lift if desired */
 .logo-wrap:hover img{transform:translateY(-3px);filter:none}
 
-/* ── BIG BADGE ── */
-.hero-badge{
-  display:inline-flex;align-items:center;gap:.75rem;
-  background:var(--orange);color:#fff;
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(1.1rem,3.5vw,1.8rem);
-  letter-spacing:.08em;
-  padding:.6rem 1.75rem;
-  margin-bottom:2rem;
-  clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);
-  animation:badge-pulse 3s ease-in-out infinite;
-}
-@keyframes badge-pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,119,34,0)}50%{box-shadow:0 0 30px 8px rgba(232,119,34,0.45)}}
-.hero-badge .live-dot{width:10px;height:10px;border-radius:50%;background:#fff;animation:live 1.2s ease-in-out infinite;flex-shrink:0}
-@keyframes live{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
 
 .hero-tagline{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,7vw,4.5rem);letter-spacing:.04em;color:var(--text);margin-bottom:.4rem;line-height:1}
 .hero-tagline .hi{color:var(--orange)}

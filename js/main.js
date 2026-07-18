@@ -6,7 +6,7 @@ function applyTheme(d){html.setAttribute('data-theme',d?'dark':'light');themeIco
 applyTheme(dark);themeBtn.addEventListener('click',()=>{dark=!dark;applyTheme(dark)});
 
 // TICKER
-const items=['🔥 Website Coming Soon','✅ Box Very Much Open','📲 DM for Free Trial','💪 Fitness For Everyone','🧡 Official CrossFit Affiliate','🗓️ Strong Saturdays','📍 ITPH CapitaLand HITEC City','😤 No Excuses'];
+const items=['✅ Box Very Much Open','📲 DM for Free Trial','💪 Fitness For Everyone','🧡 Official CrossFit Affiliate','🗓️ Strong Saturdays','📍 ITPH CapitaLand HITEC City','😤 No Excuses'];
 const tickerEl=document.getElementById('ticker');
 const full=[...items,...items].map(t=>`<span class="ticker-item">${t}<span class="ticker-sep">·</span></span>`).join('');
 tickerEl.innerHTML=full+full;
