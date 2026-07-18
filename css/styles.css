@@ -19,7 +19,7 @@
   --bg:#EEE8DF;--bg2:#fff;--bg3:#f5f0ea;
   --border:#DDD5C8;--border2:#C8BEB2;
   --text:#151515;--text2:#666;--text3:#AAA;
-  --bar-bg:#DDD5C8;--logo-wrap-bg:transparent;--logo-wrap-r:14px;
+  --logo-wrap-bg:transparent;--logo-wrap-r:14px;
   --card-hover-bg:rgba(232,119,34,0.06);
   --ticker-bg:#E87722;--ticker-text:#fff;
   --slash-color:rgba(232,119,34,0.08);
@@ -114,14 +114,6 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .community-card h4{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.05em;color:var(--text);margin-bottom:.3rem}
 .community-card p{font-size:.82rem;color:var(--text2);line-height:1.5}
 
-/* ── PROGRESS ── */
-.wod-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;flex-wrap:wrap}
-.wod-name{font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:600;color:var(--text2);width:100%;max-width:200px;text-align:left;flex-shrink:0}
-@media(max-width:400px){.wod-name{max-width:130px;font-size:.78rem}}
-.wod-bar-bg{flex:1;min-width:60px;height:6px;background:var(--bar-bg);border-radius:3px;overflow:hidden;transition:background .3s}
-.wod-bar-fill{height:100%;background:var(--orange);border-radius:3px;width:0;animation:fill-bar 2.5s ease-out forwards}
-@keyframes fill-bar{to{width:var(--w)}}
-.wod-pct{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;color:var(--orange);min-width:32px;text-align:right;flex-shrink:0}
 
 /* ── CONTACT ── */
 .contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
