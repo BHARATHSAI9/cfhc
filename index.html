@@ -99,7 +99,8 @@
     <a class="nav-link" href="#wod">WOD Generator</a>
     <a class="nav-link" href="#excuses">Excuse Buster</a>
     <a class="nav-link" href="#contact">Contact</a>
-    <a class="nav-cta" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">Free Trial</a>
+    <a class="nav-link" href="#careers">Careers</a>
+    <a class="nav-cta js-trial" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">Free Trial</a>
   </div>
 </nav>
 
@@ -125,7 +126,7 @@
     </div>
 
     <div class="cta-group">
-      <a class="btn-primary" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">📲 DM for Free Trial</a>
+      <a class="btn-primary js-trial" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">📲 DM for Free Trial</a>
       <a class="btn-secondary" href="tel:+919811176700">📞 Call Us</a>
     </div>
   </div>
@@ -148,7 +149,7 @@
   </div>
   <p style="font-size:1rem;color:var(--text2);font-family:'Barlow Condensed',sans-serif;letter-spacing:.05em;text-align:center;margin-top:1.5rem;margin-bottom:1rem">New here? Your first class is on us.</p>
   <div style="display:flex;justify-content:center">
-    <a class="btn-primary" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">📲 DM us to book it →</a>
+    <a class="btn-primary js-trial" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">📲 DM us to book it →</a>
   </div>
 </div>
 
@@ -333,7 +334,7 @@
   <div class="trial-box">
     <h3>Ready to Stop Scrolling and Start Lifting?</h3>
     <p>Your first class is on us. DM us on Instagram or call to book your free trial session. No experience needed, just show up.</p>
-    <a class="btn-white" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener" onclick="fireConfetti()">🔥 Book My Free Trial</a>
+    <a class="btn-white js-trial" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener" onclick="fireConfetti()">🔥 Book My Free Trial</a>
   </div>
 </div>
 
@@ -355,6 +356,18 @@
 </div>
 
 <footer>© CrossFit HITEC City · All Reps Reserved · No Excuses · <a href="https://instagram.com/crossfithiteccity" target="_blank">@crossfithiteccity</a></footer>
+
+<!-- ══ TRIAL MODAL ══ -->
+<!-- pops up when any free trial button is clicked, lets people pick instagram or whatsapp -->
+<div class="modal-overlay" id="trialModal" hidden>
+  <div class="modal-card">
+    <button class="modal-close" aria-label="Close">✕</button>
+    <h3>Book Your Free Trial</h3>
+    <p>Pick whichever is easier. We reply on both, fast.</p>
+    <a class="modal-btn ig" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">📲 DM on Instagram</a>
+    <a class="modal-btn wa" href="https://wa.me/919811176700?text=Hi!%20I%20want%20to%20book%20my%20free%20trial%20class%20at%20CrossFit%20HITEC%20City." target="_blank" rel="noopener">💬 WhatsApp Us</a>
+  </div>
+</div>
 
 <script src="js/main.js"></script>
 </body>

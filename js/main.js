@@ -5,6 +5,14 @@ let dark=localStorage.getItem('cf-theme')?localStorage.getItem('cf-theme')==='da
 function applyTheme(d){html.setAttribute('data-theme',d?'dark':'light');themeIcon.textContent=d?'☀️':'🌙';themeLabel.textContent=d?'Light':'Dark';localStorage.setItem('cf-theme',d?'dark':'light')}
 applyTheme(dark);themeBtn.addEventListener('click',()=>{dark=!dark;applyTheme(dark)});
 
+// TRIAL MODAL
+// every free trial button opens the pick-a-channel popup instead of jumping
+// straight to instagram. the links still work as plain instagram links if js is off.
+const trialModal=document.getElementById('trialModal');
+document.querySelectorAll('.js-trial').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();trialModal.hidden=false}));
+trialModal.addEventListener('click',e=>{if(e.target===trialModal||e.target.closest('.modal-close'))trialModal.hidden=true});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')trialModal.hidden=true});
+
 // TICKER
 const items=['✅ Box Very Much Open','📲 DM for Free Trial','💪 Fitness For Everyone','🧡 Official CrossFit Affiliate','🗓️ Strong Saturdays','📍 ITPH CapitaLand HITEC City','😤 No Excuses'];
 const tickerEl=document.getElementById('ticker');
