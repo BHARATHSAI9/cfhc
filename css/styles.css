@@ -129,6 +129,17 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .sched-card--rest{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 .sched-rest-emoji{font-size:2.4rem;margin-bottom:.4rem;line-height:1}
 
+/* ── COACHES ── */
+.coaches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+.coach-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:border-color .2s,transform .2s}
+.coach-card:hover{border-color:var(--orange);transform:translateY(-3px)}
+/* photos are a mixed bag, so crop them square and grey them out so the row looks like one set. colour comes back on hover */
+.coach-photo{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center 28%;display:block;filter:grayscale(1);transition:filter .3s}
+.coach-card:hover .coach-photo{filter:grayscale(0)}
+.coach-info{padding:1rem 1.1rem 1.25rem}
+.coach-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.03em;color:var(--text);margin-bottom:.35rem}
+.coach-about{font-size:.85rem;color:var(--text2);line-height:1.5}
+
 /* ── CONTACT ── */
 .contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
 @media(max-width:480px){.contact-grid{grid-template-columns:1fr}}
