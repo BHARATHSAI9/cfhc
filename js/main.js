@@ -15,10 +15,6 @@ tickerEl.innerHTML=full+full;
 const dropsEl=document.getElementById('drops');
 for(let i=0;i<20;i++){const d=document.createElement('div');d.className='drop';const h=Math.random()*10+4;d.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*-20}%;height:${h}px;width:${Math.random()*2+1}px;--dur:${Math.random()*6+5}s;--del:${Math.random()*10}s`;dropsEl.appendChild(d)}
 
-// COUNTERS
-function animateCount(el,target,dur){let s=0,step=target/(dur/16);const iv=setInterval(()=>{s=Math.min(s+step,target);el.textContent=Math.floor(s).toLocaleString();if(s>=target)clearInterval(iv)},16)}
-setTimeout(()=>{animateCount(document.getElementById('followerCount'),2497,1800);animateCount(document.getElementById('postCount'),380,1400)},500);
-
 // WOD GENERATOR
 const wods=[
   {name:"AMRAP 20",desc:"5 Pull-ups · 10 Push-ups · 15 Air Squats",type:"Bodyweight",emoji:"🔥"},

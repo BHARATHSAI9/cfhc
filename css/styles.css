@@ -34,7 +34,7 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 
 /* ── TICKER ── */
 .ticker-wrap{background:var(--ticker-bg);overflow:hidden;width:100%;padding:.55rem 0;position:relative;z-index:10}
-.ticker{display:flex;width:max-content;animation:ticker-scroll 28s linear infinite}
+.ticker{display:flex;width:max-content;animation:ticker-scroll 45s linear infinite}
 .ticker-item{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ticker-text);padding:0 2.5rem;white-space:nowrap}
 .ticker-sep{color:rgba(255,255,255,0.4);padding:0 .5rem}
 @keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
