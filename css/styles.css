@@ -114,6 +114,18 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .community-card h4{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.05em;color:var(--text);margin-bottom:.3rem}
 .community-card p{font-size:.82rem;color:var(--text2);line-height:1.5}
 
+/* ── SCHEDULE ── */
+.schedule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.sched-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.5rem;position:relative;overflow:hidden;transition:background .3s,border-color .3s}
+.sched-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--orange)}
+.sched-day{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.03em;color:var(--text);margin-bottom:.5rem}
+.sched-block{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin:.9rem 0 .5rem}
+.time-pills{display:flex;flex-wrap:wrap;gap:.45rem}
+.time-pill{font-family:'Barlow Condensed',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.04em;color:var(--text2);border:1px solid var(--border2);border-radius:3px;padding:.3rem .6rem;white-space:nowrap}
+.sched-session{display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem}
+.sched-session .time-pill{color:#fff;background:var(--orange);border-color:var(--orange)}
+.sched-session-name{font-family:'Barlow Condensed',sans-serif;font-size:.95rem;font-weight:600;color:var(--text)}
+.sched-rest-text{font-family:'Barlow Condensed',sans-serif;font-size:.9rem;color:var(--text2);line-height:1.5}
 
 /* ── CONTACT ── */
 .contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
