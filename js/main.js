@@ -5,12 +5,6 @@ let dark=localStorage.getItem('cf-theme')?localStorage.getItem('cf-theme')==='da
 function applyTheme(d){html.setAttribute('data-theme',d?'dark':'light');themeIcon.textContent=d?'☀️':'🌙';themeLabel.textContent=d?'Light':'Dark';localStorage.setItem('cf-theme',d?'dark':'light')}
 applyTheme(dark);themeBtn.addEventListener('click',()=>{dark=!dark;applyTheme(dark)});
 
-// NAV
-// show the nav only after the hero has scrolled out of view
-const siteNav=document.getElementById('siteNav');
-const heroEl=document.querySelector('.hero');
-new IntersectionObserver(entries=>{siteNav.classList.toggle('visible',!entries[0].isIntersecting)}).observe(heroEl);
-
 // TICKER
 const items=['✅ Box Very Much Open','📲 DM for Free Trial','💪 Fitness For Everyone','🧡 Official CrossFit Affiliate','🗓️ Strong Saturdays','📍 ITPH CapitaLand HITEC City','😤 No Excuses'];
 const tickerEl=document.getElementById('ticker');

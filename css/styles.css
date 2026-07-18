@@ -33,10 +33,9 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .theme-btn:hover{border-color:var(--orange);color:var(--orange)}
 
 /* ── NAV ── */
-/* fixed strip that stays hidden until you scroll past the hero. the floating
-   theme button sits on top of it, so the inner row leaves room on the right */
-.site-nav{position:fixed;top:0;left:0;right:0;z-index:250;background:var(--bg2);border-bottom:1px solid var(--border);transform:translateY(-100%);transition:transform .3s ease,background .3s,border-color .3s}
-.site-nav.visible{transform:none}
+/* sits under the ticker and sticks to the top of the screen while you scroll.
+   the floating theme button sits on top of it, so the inner row leaves room on the right */
+.site-nav{position:sticky;top:0;z-index:250;background:var(--bg2);border-bottom:1px solid var(--border);transition:background .3s,border-color .3s}
 .nav-inner{display:flex;align-items:center;gap:1.25rem;padding:.7rem 1rem;padding-right:7.5rem;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .nav-inner::-webkit-scrollbar{display:none}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;line-height:1;color:var(--orange);text-decoration:none;letter-spacing:.06em}
