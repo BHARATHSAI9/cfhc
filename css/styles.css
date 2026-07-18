@@ -139,6 +139,11 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .coach-info{padding:1rem 1.1rem 1.25rem}
 .coach-name{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.03em;color:var(--text);margin-bottom:.35rem}
 .coach-about{font-size:.85rem;color:var(--text2);line-height:1.5}
+/* small orange role tag, used for khairul the backbone */
+.coach-tag{font-family:'Barlow Condensed',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:.2rem}
+/* one support staff, so show him as a single centered card under the coaches */
+.backbone{display:flex;justify-content:center;margin-top:1rem}
+.backbone .coach-card{width:100%;max-width:260px}
 
 /* ── CONTACT ── */
 .contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
