@@ -33,6 +33,41 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,700&family=Barlow:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/styles.css"/>
+
+  <!-- structured data so search engines understand this is a crossfit gym in hyderabad, with the address, phone and hours -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HealthClub",
+    "name": "CrossFit HITEC City",
+    "description": "CrossFit HITEC City is a CrossFit gym in Madhapur, Hyderabad and an official CrossFit affiliate. Coached group classes, personal training, open gym and Hyrox training.",
+    "url": "https://crossfithiteccity.com/",
+    "logo": "https://crossfithiteccity.com/logos/logo.png",
+    "image": "https://crossfithiteccity.com/og-image.png",
+    "telephone": "+919811176700",
+    "sameAs": [
+      "https://instagram.com/crossfithiteccity"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "First Floor East Wing Block A, International Tech Park Hyderabad, Survey No. 64/2, Plot 17, Madhapur",
+      "addressLocality": "Hyderabad",
+      "addressRegion": "Telangana",
+      "postalCode": "500081",
+      "addressCountry": "IN"
+    },
+    "hasMap": "https://share.google/ez5UWl0daaJvxQwB5",
+    "areaServed": "Hyderabad",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "06:00",
+        "closes": "21:00"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <canvas id="confetti"></canvas>
