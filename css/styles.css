@@ -84,6 +84,8 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .stat-item:last-child{border-right:none}
 .stat-item:hover{background:var(--bg3)}
 .stat-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--orange);line-height:1}
+/* infinity drawn as svg so it looks identical on every device instead of falling back to a system font */
+.stat-infinity{display:block;width:2.6rem;height:1.5rem;color:var(--orange)}
 .stat-label{font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text3)}
 @media(max-width:480px){.stats-bar{border:none;gap:.5rem}.stat-item{border:1px solid var(--border2);border-radius:4px;padding:.75rem 1.25rem}.stat-item:last-child{border-right:1px solid var(--border2)}}
 
