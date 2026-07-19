@@ -72,20 +72,9 @@ document.querySelectorAll('.level-btn').forEach(b=>b.addEventListener('click',()
 genBtn.addEventListener('click',generateWOD);
 
 // EXCUSE BUSTER
-const excuses=[
-  ["I'm too tired after work.","So are we. We come anyway. See you at 6am."],
-  ["I don't know how to do CrossFit.","Nobody did. Now they deadlift twice their bodyweight. First class is free."],
-  ["It's too expensive.","One EMI missed on that phone upgrade = 2 months of CrossFit. Think about it."],
-  ["I need to get fit before I start.","That's like washing dishes before putting them in the dishwasher."],
-  ["I'm scared of getting injured.","Sitting at a desk 9 hours a day is also an injury. Just slower."],
-  ["My friends aren't into it.","They will be. After they see the transformation. Or they won't. Come alone."],
-  ["I don't have time.","You have time for Instagram Reels. You have time. We're just saying."],
-  ["I tried CrossFit and it was too hard.","Good. Hard things make you better. The second class is easier. DM us."],
-  ["I'll start on Monday.","Classic. Monday called. It says stop using it as a scapegoat."],
-  ["I'm not the gym type.","Neither was our athlete who arrived in office clothes. He coaches here now."],
-];
+// excuses live in the config in excuses.js (EXCUSES). data only, easy to add more.
 function bustExcuse(){
-  const [ex,reply]=excuses[Math.floor(Math.random()*excuses.length)];
+  const [ex,reply]=EXCUSES[Math.floor(Math.random()*EXCUSES.length)];
   const et=document.getElementById('excuseText'),rt=document.getElementById('replyText');
   et.style.transition='opacity .18s';rt.style.transition='opacity .18s';
   et.style.opacity=0;rt.style.opacity=0;
