@@ -106,10 +106,18 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 /* ── WOD GENERATOR ── */
 .wod-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.75rem;margin-bottom:1rem;transition:background .3s,border-color .3s;position:relative;overflow:hidden}
 .wod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--orange)}
-.wod-display{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,4vw,2rem);color:var(--orange);letter-spacing:.04em;line-height:1.35;min-height:4rem;display:flex;align-items:center;transition:opacity .2s}
+/* box vs home toggle sits above the workout */
+.wod-toggle{display:flex;gap:.5rem;margin-bottom:1.1rem}
+.wod-display{min-height:4rem;display:flex;flex-direction:column;justify-content:center;gap:.4rem;transition:opacity .2s}
+/* the placeholder prompt (plain text, no spans) reads in bebas orange like a cue */
+.wod-display{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,4vw,2rem);color:var(--orange);letter-spacing:.04em;line-height:1.35}
+.wod-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,4.5vw,2.1rem);color:var(--orange);letter-spacing:.04em;line-height:1}
+.wod-format{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text2)}
+.wod-moves{font-family:'Barlow',sans-serif;font-size:1rem;color:var(--text);line-height:1.5}
 .wod-meta{margin-top:.75rem;font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.1em;color:var(--text2);text-transform:uppercase}
 .wod-meta span{color:var(--orange);margin-right:.5rem}
-.wod-actions{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+.wod-actions{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap;align-items:center}
+.wod-level{display:inline-flex;gap:.5rem}
 .wod-btn{background:transparent;border:1px solid var(--border2);color:var(--text2);font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1rem;border-radius:3px;cursor:pointer;transition:all .2s}
 .wod-btn:hover{border-color:var(--orange);color:var(--orange)}
 .wod-btn.hot{background:var(--orange);border-color:var(--orange);color:#fff}

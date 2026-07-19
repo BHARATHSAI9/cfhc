@@ -24,31 +24,52 @@ const dropsEl=document.getElementById('drops');
 for(let i=0;i<20;i++){const d=document.createElement('div');d.className='drop';const h=Math.random()*10+4;d.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*-20}%;height:${h}px;width:${Math.random()*2+1}px;--dur:${Math.random()*6+5}s;--del:${Math.random()*10}s`;dropsEl.appendChild(d)}
 
 // WOD GENERATOR
-const wods=[
-  {name:"AMRAP 20",desc:"5 Pull-ups · 10 Push-ups · 15 Air Squats",type:"Bodyweight",emoji:"🔥"},
-  {name:"For Time",desc:"21-15-9 Thrusters (42.5/30kg) · Pull-ups",type:"Classic: Fran",emoji:"💀"},
-  {name:"EMOM 16",desc:"Odd: 10 KB Swings · Even: 10 Box Jumps (60/50cm)",type:"Conditioning",emoji:"⚡"},
-  {name:"5 Rounds For Time",desc:"400m Run · 15 Deadlifts (100/70kg) · 20 Wall Balls",type:"Grunt Work",emoji:"😤"},
-  {name:"AMRAP 12",desc:"3 Muscle-Ups · 6 Squat Cleans (70/50kg) · 9 Toes-to-Bar",type:"Skill+Strength",emoji:"🏆"},
-  {name:"For Time",desc:"1K Row · 50 Burpees · 1K Run · 50 Burpees · 1K Row",type:"Suffer Fest™",emoji:"🫠"},
-  {name:"EMOM 20",desc:"1: 5 Heavy Back Squats · 2: 10 Ring Dips · 3: 15 GHD Sit-ups · 4: Rest",type:"Strength+Skill",emoji:"💪"},
-  {name:"7 Rounds For Time",desc:"7 Handstand Push-ups · 7 Power Cleans (60/42.5kg) · 7 Bar-Facing Burpees",type:"Hero WOD Vibes",emoji:"🫡"},
-  {name:"Tabata",desc:"8 Rounds: 20s Max Effort Rowing · 10s Rest (Score = total cals)",type:"Sprint",emoji:"🚣"},
-  {name:"Strong Saturday Special 🧡",desc:"In teams of 2: 100 Synchro Wall Balls · 80 Partner Deadlifts · 60 Synchro Box Jumps · 40 Partner KB Swings · 20 Rope Climbs",type:"Team WOD",emoji:"🤝"},
-];
-const scaled=["Half the reps, half the weight, full the pride.","Ring rows instead of pull-ups. We see you. We support you.","Box squats. Half weight. Extra smiles.","Cut the run to 200m. You showed up. That's enough.","30min cap. The clock is your friend today."];
-const rx=["Add 10kg. Halve the rest. Double the suffering.","RX+ means you do it again immediately after.","No chalk. Wet hands. That's the real RX.","Time cap? There is no time cap for the brave.","RX is just the beginning. Real champs go for RX+2."];
-function generateWOD(){
-  const wod=wods[Math.floor(Math.random()*wods.length)];
-  const d=document.getElementById('wodDisplay');d.style.opacity=0;
-  setTimeout(()=>{d.textContent=`${wod.emoji} ${wod.name}: ${wod.desc}`;d.style.opacity=1},200);
-  document.getElementById('wodMeta').innerHTML=`<span>Type:</span>${wod.type}`;
-  document.getElementById('scaleBtn').style.display='inline-flex';
-  document.getElementById('rxBtn').style.display='inline-flex';
-  document.querySelector('.wod-btn.hot').textContent='🎲 Another One';
+// workouts come from the config in wods.js (WODS.gym / WODS.home). the scaled and rx
+// buttons just swap wod[level] on the same workout, so the two are always in sync.
+let wodMode='gym', wodLevel='rx', wod=null;
+const wodDisplay=document.getElementById('wodDisplay');
+const wodMeta=document.getElementById('wodMeta');
+const wodLevelBox=document.getElementById('wodLevel');
+const genBtn=document.getElementById('genBtn');
+
+function renderWOD(){
+  wodDisplay.style.opacity=0;
+  setTimeout(()=>{
+    wodDisplay.innerHTML=`<span class="wod-name">${wod.emoji} ${wod.name}</span><span class="wod-format">${wod.format}</span><span class="wod-moves">${wod[wodLevel]}</span>`;
+    wodDisplay.style.opacity=1;
+  },180);
+  wodMeta.innerHTML=`<span>${wodLevel==='rx'?'RX':'Scaled'}</span>${wod.type}`;
 }
-function scaleWOD(){document.getElementById('wodMeta').innerHTML=`<span>Scaled:</span>${scaled[Math.floor(Math.random()*scaled.length)]}`}
-function rxWOD(){document.getElementById('wodMeta').innerHTML=`<span>RX Note:</span>${rx[Math.floor(Math.random()*rx.length)]}`}
+
+function generateWOD(){
+  const list=WODS[wodMode];
+  let next;
+  do{next=list[Math.floor(Math.random()*list.length)];}while(list.length>1&&next===wod);
+  wod=next;
+  wodLevel='rx';
+  setActive('.level-btn','level',wodLevel);
+  renderWOD();
+  wodLevelBox.style.display='inline-flex';
+  genBtn.textContent='🎲 Another One';
+}
+
+// flip the 'hot' highlight to whichever button in the group is now selected
+function setActive(selector,attr,value){
+  document.querySelectorAll(selector).forEach(b=>b.classList.toggle('hot',b.dataset[attr]===value));
+}
+
+document.querySelectorAll('.mode-btn').forEach(b=>b.addEventListener('click',()=>{
+  wodMode=b.dataset.mode;
+  setActive('.mode-btn','mode',wodMode);
+  generateWOD();
+}));
+document.querySelectorAll('.level-btn').forEach(b=>b.addEventListener('click',()=>{
+  if(!wod)return;
+  wodLevel=b.dataset.level;
+  setActive('.level-btn','level',wodLevel);
+  renderWOD();
+}));
+genBtn.addEventListener('click',generateWOD);
 
 // EXCUSE BUSTER
 const excuses=[

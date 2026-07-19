@@ -33,7 +33,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,700&family=Barlow:wght@400;500&display=swap" rel="stylesheet"/>
   <!-- the ?v= number busts browser caches, bump it whenever css or js changes -->
-  <link rel="stylesheet" href="css/styles.css?v=3"/>
+  <link rel="stylesheet" href="css/styles.css?v=4"/>
 
   <!-- structured data so search engines understand this is a crossfit gym in hyderabad, with the address, phone and hours -->
   <script type="application/ld+json">
@@ -272,14 +272,20 @@
 <div class="section-wrap reveal" id="wod">
   <div class="section-label">Interactive</div>
   <h2 class="section-title">Today's WOD Generator</h2>
-  <p class="section-body">Can't make it to the box? Here's a WOD to torture yourself with at home. You're welcome.</p>
+  <p class="section-body">Pick where you're training and roll the dice. Real crossfit benchmarks for the box, no-equipment burners for home. Scale it down or send it RX, it's the same workout either way.</p>
   <div class="wod-card">
-    <div class="wod-display" id="wodDisplay">Hit "Generate" to find out what suffering awaits you today.</div>
+    <div class="wod-toggle" role="group" aria-label="Where are you training">
+      <button class="wod-btn mode-btn hot" data-mode="gym">🏋️ At the Box</button>
+      <button class="wod-btn mode-btn" data-mode="home">🏠 At Home</button>
+    </div>
+    <div class="wod-display" id="wodDisplay">Pick a spot and hit generate to find out what suffering awaits you today.</div>
     <div class="wod-meta" id="wodMeta"></div>
     <div class="wod-actions">
-      <button class="wod-btn hot" onclick="generateWOD()">🎲 Generate WOD</button>
-      <button class="wod-btn" id="scaleBtn" onclick="scaleWOD()" style="display:none">📉 Scale it (coward mode)</button>
-      <button class="wod-btn" id="rxBtn" onclick="rxWOD()" style="display:none">💀 RX (send help)</button>
+      <button class="wod-btn hot" id="genBtn">🎲 Generate WOD</button>
+      <div class="wod-level" id="wodLevel" style="display:none" role="group" aria-label="Difficulty">
+        <button class="wod-btn level-btn" data-level="scaled">📉 Scaled</button>
+        <button class="wod-btn level-btn hot" data-level="rx">💀 RX</button>
+      </div>
     </div>
   </div>
   <p style="font-size:.78rem;color:var(--text3);font-family:'Barlow Condensed',sans-serif;letter-spacing:.05em;text-align:center">⚠️ Side effects: lying on the floor, questioning your choices, and coming back tomorrow.</p>
@@ -370,6 +376,7 @@
   </div>
 </div>
 
-<script src="js/main.js?v=2"></script>
+<script src="js/wods.js?v=1"></script>
+<script src="js/main.js?v=3"></script>
 </body>
 </html>
