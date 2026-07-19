@@ -7,13 +7,13 @@ const EXCUSES = [
   // the it crowd
   ["My calendar is back-to-back meetings.", "Ours is a 6am meeting with a barbell, and nobody declines that one. Book the early slot."],
   ["I'm on US shift, I'm up half the night.", "The box is open 6am to 9pm. There's a class for whatever your body clock is doing."],
-  ["I'm on call this week.", "The whole workout is 45 minutes. Even prod gives you that much. Come between deploys."],
+  ["I'm on call this week.", "The whole class is one hour. Even prod gives you that much. Come between deploys."],
   ["Working from home, I never leave my chair.", "Nine hours in that chair is the real injury. Come stand up, we'll teach the rest."],
   ["Deadline this sprint, maybe next one.", "There's always a next sprint, that's the whole point of them. Start today, we'll scale it."],
   ["My standup ran over again.", "Ours starts on time and ends with you on the floor. Try the evening class."],
 
   // business owners and the self employed
-  ["I run my own business, there's no off switch.", "Exactly why you need 45 minutes that are only yours. The business survives one hour, promise."],
+  ["I run my own business, there's no off switch.", "Exactly why you need one hour that's only yours. The business survives without you for that long, promise."],
   ["Let me get through this quarter first.", "The next quarter is busy too. And the one after that. First class is free, come see."],
   ["I travel for work all the time.", "The home WODs on this site need zero equipment. And the box is here the day you land."],
 
