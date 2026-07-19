@@ -3,191 +3,78 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CrossFit HITEC City — Coming Soon</title>
+  <title>CrossFit HITEC City</title>
+  <meta name="description" content="CrossFit HITEC City is a CrossFit gym in Madhapur, Hyderabad and an official CrossFit affiliate. Coached group classes, personal training, open gym and Hyrox training. Your first class is free."/>
+  <meta name="theme-color" content="#E87722"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://crossfithiteccity.com/"/>
+
+  <!-- open graph, this is what shows up when the link is shared on whatsapp, instagram, facebook etc -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="CrossFit HITEC City"/>
+  <meta property="og:title" content="CrossFit HITEC City"/>
+  <meta property="og:description" content="Official CrossFit affiliate in HITEC City, Hyderabad. Coached classes, personal training, open gym and Hyrox. Your first class is on us."/>
+  <meta property="og:url" content="https://crossfithiteccity.com/"/>
+  <meta property="og:image" content="https://crossfithiteccity.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="CrossFit HITEC City logo with the tagline fitness for everyone, excuses for no one."/>
+
+  <!-- twitter uses its own tags for the same thing -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="CrossFit HITEC City"/>
+  <meta name="twitter:description" content="Official CrossFit affiliate in HITEC City, Hyderabad. Your first class is on us."/>
+  <meta name="twitter:image" content="https://crossfithiteccity.com/og-image.png"/>
+
+  <!-- favicons, the little icon in the browser tab -->
+  <link rel="icon" href="favicon.ico" sizes="any"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,700&family=Barlow:wght@400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  <!-- the ?v= number busts browser caches, bump it whenever css or js changes -->
+  <link rel="stylesheet" href="css/styles.css?v=4"/>
 
-    :root{--orange:#E87722;--orange-dim:rgba(232,119,34,0.18);--orange-glow:rgba(232,119,34,0.10)}
-
-    [data-theme="dark"]{
-      --bg:#070707;--bg2:#111;--bg3:#181818;
-      --border:#222;--border2:#333;
-      --text:#F2F2F2;--text2:#888;--text3:#444;
-      /* subtle pale panel behind logo so it reads on dark backgrounds */
-      --logo-wrap-bg:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.035));
-      --logo-wrap-border:rgba(255,255,255,0.09);
-      --logo-wrap-r:6px;
-      --card-hover-bg:rgba(232,119,34,0.07);
-      --ticker-bg:#E87722;--ticker-text:#fff;
-      --slash-color:rgba(232,119,34,0.06);
-      --stamp-color:rgba(232,119,34,0.07);
-      --orange-glow:rgba(232,119,34,0.18);
-    }
-    [data-theme="light"]{
-      --bg:#EEE8DF;--bg2:#fff;--bg3:#f5f0ea;
-      --border:#DDD5C8;--border2:#C8BEB2;
-      --text:#151515;--text2:#666;--text3:#AAA;
-      --bar-bg:#DDD5C8;--logo-wrap-bg:transparent;--logo-wrap-r:14px;
-      --card-hover-bg:rgba(232,119,34,0.06);
-      --ticker-bg:#E87722;--ticker-text:#fff;
-      --slash-color:rgba(232,119,34,0.08);
-      --stamp-color:rgba(232,119,34,0.08);
-    }
-
-    html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
-
-    /* ── THEME BTN ── */
-    .theme-btn{position:fixed;top:1rem;right:1rem;z-index:300;background:var(--bg2);border:1px solid var(--border2);border-radius:50px;padding:.35rem .9rem;cursor:pointer;display:flex;align-items:center;gap:.4rem;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);transition:border-color .2s,color .2s,background .3s}
-    .theme-btn:hover{border-color:var(--orange);color:var(--orange)}
-
-    /* ── TICKER ── */
-    .ticker-wrap{background:var(--ticker-bg);overflow:hidden;width:100%;padding:.55rem 0;position:relative;z-index:10}
-    .ticker{display:flex;width:max-content;animation:ticker-scroll 28s linear infinite}
-    .ticker-item{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ticker-text);padding:0 2.5rem;white-space:nowrap}
-    .ticker-sep{color:rgba(255,255,255,0.4);padding:0 .5rem}
-    @keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-    /* ── HERO ── */
-    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 1.5rem 4rem;text-align:center;position:relative;overflow:hidden}
-
-    /* diagonal slash bg */
-    .hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(60deg,var(--slash-color) 0px,var(--slash-color) 1px,transparent 1px,transparent 60px);pointer-events:none;z-index:0}
-    /* orange glow blob */
-    .hero::after{content:'';position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:760px;height:520px;background:radial-gradient(ellipse,var(--orange-glow) 0%,transparent 60%);pointer-events:none;z-index:0}
-
-    /* big COMING SOON watermark */
-    .hero-stamp{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,18vw,14rem);color:var(--stamp-color);letter-spacing:.1em;user-select:none;pointer-events:none;z-index:0;white-space:nowrap;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-8deg)}
-
-    /* orange side-slash accent */
-    .hero-slash-left{position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--orange);z-index:1}
-    .hero-slash-right{position:absolute;right:0;top:0;bottom:0;width:5px;background:var(--orange);z-index:1}
-
-    .hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
-
-    .logo-wrap{width:min(420px,85vw);margin-bottom:2rem;background:var(--logo-wrap-bg);border-radius:var(--logo-wrap-r);padding:.5rem;transition:background .3s,border-radius .3s}
-    .logo-wrap{border:1px solid var(--logo-wrap-border);box-shadow:none;display:inline-block}
-    .logo-wrap img{width:100%;height:auto;display:block;filter:none;transition:transform .25s}
-    /* removed shadows; keep subtle hover lift if desired */
-    .logo-wrap:hover img{transform:translateY(-3px);filter:none}
-
-    /* ── BIG BADGE ── */
-    .hero-badge{
-      display:inline-flex;align-items:center;gap:.75rem;
-      background:var(--orange);color:#fff;
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(1.1rem,3.5vw,1.8rem);
-      letter-spacing:.08em;
-      padding:.6rem 1.75rem;
-      margin-bottom:2rem;
-      clip-path:polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);
-      animation:badge-pulse 3s ease-in-out infinite;
-    }
-    @keyframes badge-pulse{0%,100%{box-shadow:0 0 0 0 rgba(232,119,34,0)}50%{box-shadow:0 0 30px 8px rgba(232,119,34,0.45)}}
-    .hero-badge .live-dot{width:10px;height:10px;border-radius:50%;background:#fff;animation:live 1.2s ease-in-out infinite;flex-shrink:0}
-    @keyframes live{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
-
-    .hero-tagline{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,7vw,4.5rem);letter-spacing:.04em;color:var(--text);margin-bottom:.4rem;line-height:1}
-    .hero-tagline .hi{color:var(--orange)}
-    .hero-tagline .strike{text-decoration:line-through;opacity:.35}
-
-    .hero-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(.8rem,2vw,1rem);letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:2.5rem}
-
-    /* ── STATS ── */
-    .stats-bar{display:flex;gap:0;flex-wrap:wrap;justify-content:center;margin-bottom:3rem;border:1px solid var(--border2);border-radius:4px;overflow:hidden}
-    .stat-item{display:flex;flex-direction:column;align-items:center;gap:.2rem;padding:.9rem 1.75rem;border-right:1px solid var(--border2);background:var(--bg2);transition:background .3s}
-    .stat-item:last-child{border-right:none}
-    .stat-item:hover{background:var(--bg3)}
-    .stat-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--orange);line-height:1}
-    .stat-label{font-family:'Barlow Condensed',sans-serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text3)}
-    @media(max-width:480px){.stats-bar{border:none;gap:.5rem}.stat-item{border:1px solid var(--border2);border-radius:4px;padding:.75rem 1.25rem}.stat-item:last-child{border-right:1px solid var(--border2)}}
-
-    /* ── CTA ── */
-    .cta-group{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
-    .btn-primary{background:var(--orange);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 2rem;border-radius:3px;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
-    .btn-primary:hover{background:#c45e0e;transform:translateY(-2px)}
-    .btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border2);font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 2rem;border-radius:3px;text-decoration:none;cursor:pointer;transition:border-color .2s,color .2s,transform .15s;display:inline-flex;align-items:center;gap:.5rem}
-    .btn-secondary:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-2px)}
-
-    /* ── SECTION ── */
-    .section-wrap{padding:4rem 1.5rem;max-width:700px;margin:0 auto}
-    .section-label{font-family:'Barlow Condensed',sans-serif;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:.4rem}
-    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,6vw,3rem);letter-spacing:.03em;line-height:1;margin-bottom:1.25rem}
-    .section-body{color:var(--text2);font-size:.95rem;line-height:1.7;margin-bottom:1.5rem}
-    .section-divider{width:100%;height:1px;background:var(--border);margin:0}
-
-    /* ── WOD GENERATOR ── */
-    .wod-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.75rem;margin-bottom:1rem;transition:background .3s,border-color .3s;position:relative;overflow:hidden}
-    .wod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--orange)}
-    .wod-display{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,4vw,2rem);color:var(--orange);letter-spacing:.04em;line-height:1.35;min-height:4rem;display:flex;align-items:center;transition:opacity .2s}
-    .wod-meta{margin-top:.75rem;font-family:'Barlow Condensed',sans-serif;font-size:.8rem;letter-spacing:.1em;color:var(--text2);text-transform:uppercase}
-    .wod-meta span{color:var(--orange);margin-right:.5rem}
-    .wod-actions{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
-    .wod-btn{background:transparent;border:1px solid var(--border2);color:var(--text2);font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1rem;border-radius:3px;cursor:pointer;transition:all .2s}
-    .wod-btn:hover{border-color:var(--orange);color:var(--orange)}
-    .wod-btn.hot{background:var(--orange);border-color:var(--orange);color:#fff}
-
-    /* ── EXCUSE ── */
-    .excuse-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.5rem 1.75rem;margin-bottom:1.25rem;transition:background .3s;position:relative;overflow:hidden}
-    .excuse-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:#E87722}
-    .excuse-text{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:1.05rem;color:var(--text2);margin-bottom:.75rem;min-height:2.5rem;transition:opacity .2s}
-    .reply-text{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;color:var(--orange);transition:opacity .2s}
-
-    /* ── COMMUNITY ── */
-    .community-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1rem;margin-bottom:1.5rem}
-    .community-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.25rem;transition:border-color .2s,background .2s,transform .2s}
-    .community-card:hover{border-color:var(--orange);background:var(--card-hover-bg);transform:translateY(-3px)}
-    .community-card .emoji{font-size:1.6rem;margin-bottom:.6rem}
-    .community-card h4{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.05em;color:var(--text);margin-bottom:.3rem}
-    .community-card p{font-size:.82rem;color:var(--text2);line-height:1.5}
-
-    /* ── PROGRESS ── */
-    .wod-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;flex-wrap:wrap}
-    .wod-name{font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:600;color:var(--text2);width:100%;max-width:200px;text-align:left;flex-shrink:0}
-    @media(max-width:400px){.wod-name{max-width:130px;font-size:.78rem}}
-    .wod-bar-bg{flex:1;min-width:60px;height:6px;background:var(--bar-bg);border-radius:3px;overflow:hidden;transition:background .3s}
-    .wod-bar-fill{height:100%;background:var(--orange);border-radius:3px;width:0;animation:fill-bar 2.5s ease-out forwards}
-    @keyframes fill-bar{to{width:var(--w)}}
-    .wod-pct{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;color:var(--orange);min-width:32px;text-align:right;flex-shrink:0}
-
-    /* ── CONTACT ── */
-    .contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
-    @media(max-width:480px){.contact-grid{grid-template-columns:1fr}}
-    .contact-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.1rem;text-decoration:none;display:flex;flex-direction:column;gap:.3rem;transition:border-color .2s,background .2s,transform .2s}
-    .contact-card:hover{border-color:var(--orange);background:var(--card-hover-bg);transform:translateY(-2px)}
-    .cc-label{font-family:'Barlow Condensed',sans-serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text3)}
-    .cc-value{font-family:'Barlow Condensed',sans-serif;font-size:.95rem;font-weight:600;color:var(--text);line-height:1.35;transition:color .3s}
-    .contact-card.ig:hover{border-color:#E1306C;background:rgba(225,48,108,.05)}
-    .contact-card.ig .cc-value{color:#E1306C}
-    .contact-card.full{grid-column:span 2}
-    @media(max-width:480px){.contact-card.full{grid-column:span 1}}
-    .contact-card.full .cc-value{font-size:.82rem}
-    .ig-icon{width:18px;height:18px;margin-bottom:.2rem}
-
-    /* ── FREE TRIAL BOX ── */
-    .trial-box{margin-top:2rem;background:var(--orange);border-radius:6px;padding:2.25rem;text-align:center;position:relative;overflow:hidden}
-    .trial-box::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(60deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 40px)}
-    .trial-box h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,5vw,2.4rem);color:#fff;margin-bottom:.5rem;position:relative;z-index:1}
-    .trial-box p{font-family:'Barlow Condensed',sans-serif;font-size:.95rem;color:rgba(255,255,255,.85);margin-bottom:1.25rem;line-height:1.6;position:relative;z-index:1}
-    .btn-white{background:#fff;color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 2rem;border-radius:3px;text-decoration:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;transition:transform .15s,box-shadow .15s;position:relative;z-index:1;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
-    .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
-
-    /* ── DROPS ── */
-    #drops{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-    .drop{position:absolute;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--orange);opacity:0;animation:sweat var(--dur) ease-in var(--del) infinite}
-    @keyframes sweat{0%{opacity:0;transform:translateY(0)}10%{opacity:.07}100%{opacity:0;transform:translateY(110vh)}}
-
-    /* ── FOOTER ── */
-    footer{text-align:center;padding:2rem 1.5rem;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);border-top:1px solid var(--border);transition:border-color .3s,color .3s}
-    footer a{color:var(--orange);text-decoration:none}
-
-    /* ── REVEAL ── */
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
-    .reveal.visible{opacity:1;transform:none}
-
-    canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:400}
-  </style>
+  <!-- structured data so search engines understand this is a crossfit gym in hyderabad, with the address, phone and hours -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HealthClub",
+    "name": "CrossFit HITEC City",
+    "description": "CrossFit HITEC City is a CrossFit gym in Madhapur, Hyderabad and an official CrossFit affiliate. Coached group classes, personal training, open gym and Hyrox training.",
+    "url": "https://crossfithiteccity.com/",
+    "logo": "https://crossfithiteccity.com/logos/logo.png",
+    "image": "https://crossfithiteccity.com/og-image.png",
+    "telephone": "+919811176700",
+    "sameAs": [
+      "https://instagram.com/crossfithiteccity"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "First Floor East Wing Block A, International Tech Park Hyderabad, Survey No. 64/2, Plot 17, Madhapur",
+      "addressLocality": "Hyderabad",
+      "addressRegion": "Telangana",
+      "postalCode": "500081",
+      "addressCountry": "IN"
+    },
+    "hasMap": "https://share.google/ez5UWl0daaJvxQwB5",
+    "areaServed": "Hyderabad",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "06:00",
+        "closes": "21:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <canvas id="confetti"></canvas>
@@ -202,21 +89,30 @@
   </div>
 </div>
 
+<!-- ══ NAV ══ -->
+<!-- sits under the ticker and sticks to the top while you scroll -->
+<nav class="site-nav" aria-label="Site">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">CFHC</a>
+    <a class="nav-link" href="#offer">What We Offer</a>
+    <a class="nav-link" href="#coaches">Our Team</a>
+    <a class="nav-link" href="#schedule">Schedule</a>
+    <a class="nav-link" href="#wod">WOD Generator</a>
+    <a class="nav-link" href="#excuses">Excuse Buster</a>
+    <a class="nav-link" href="#contact">Contact</a>
+    <a class="nav-link" href="#careers">Careers</a>
+    <a class="nav-cta js-trial" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">Free Trial</a>
+  </div>
+</nav>
+
 <!-- ══ HERO ══ -->
 <div class="hero">
   <div class="hero-slash-left"></div>
   <div class="hero-slash-right"></div>
-  <div class="hero-stamp" aria-hidden="true">COMING SOON</div>
 
   <div class="hero-inner">
     <div class="logo-wrap">
       <img src="logos/logo_without_bg.png" alt="CrossFit HITEC City"/>
-    </div>
-
-    <!-- BIG BADGE -->
-    <div class="hero-badge">
-      <span class="live-dot"></span>
-      Website Coming Soon &nbsp;·&nbsp; Box Very Much Open
     </div>
 
     <h1 class="hero-tagline">
@@ -226,14 +122,12 @@
     <p class="hero-sub">Official CrossFit Affiliate &nbsp;·&nbsp; ITPH CapitaLand HITEC City &nbsp;·&nbsp; Hyderabad</p>
 
     <div class="stats-bar">
-      <div class="stat-item"><div class="stat-num" id="followerCount">0</div><div class="stat-label">Followers</div></div>
-      <div class="stat-item"><div class="stat-num" id="postCount">0</div><div class="stat-label">Posts</div></div>
       <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Burpees Done</div></div>
       <div class="stat-item"><div class="stat-num">0</div><div class="stat-label">Excuses Accepted</div></div>
     </div>
 
     <div class="cta-group">
-      <a class="btn-primary" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">📲 DM for Free Trial</a>
+      <a class="btn-primary js-trial" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">📲 DM for Free Trial</a>
       <a class="btn-secondary" href="tel:+919811176700">📞 Call Us</a>
     </div>
   </div>
@@ -241,18 +135,157 @@
 
 <div class="section-divider"></div>
 
+<!-- ══ WHAT WE OFFER ══ -->
+<!-- real stuff we actually offer. keeps the "more than a regular gym" message up top. -->
+<div class="section-wrap reveal" id="offer">
+  <div class="section-label">What We Offer</div>
+  <h2 class="section-title">This Isn't a Regular Gym</h2>
+  <p class="section-body">No rows of treadmills, no working out alone in the corner. You get coached classes, real programming, and people who know your name. Here's what that looks like.</p>
+  <div class="community-grid">
+    <div class="community-card"><div class="emoji">🏋️</div><h4>Group CrossFit Classes</h4><p>Coach-led sessions, never the same workout twice, scaled to whatever level you walk in at. the heart of the box.</p></div>
+    <div class="community-card"><div class="emoji">🎯</div><h4>Personal Training</h4><p>One-on-one coaching built around your goals, at your pace. we go where you want to go.</p></div>
+    <div class="community-card"><div class="emoji">🕒</div><h4>Open Gym</h4><p>Your space, your time. crossfit, hyrox and traditional gym equipment all on the floor, so you can drop in outside class hours and train your way.</p></div>
+    <div class="community-card"><div class="emoji">🏃</div><h4>Hyrox Training</h4><p>Focused prep for Hyrox. running plus functional stations, the way the race actually hits.</p></div>
+    <div class="community-card"><div class="emoji">🤝</div><h4>Strong Community</h4><p>The one thing a regular gym can't hand you. strangers who cheer you through your last rep.</p></div>
+  </div>
+  <p style="font-size:1rem;color:var(--text2);font-family:'Barlow Condensed',sans-serif;letter-spacing:.05em;text-align:center;margin-top:1.5rem;margin-bottom:1rem">New here? Your first class is on us.</p>
+  <div style="display:flex;justify-content:center">
+    <a class="btn-primary js-trial" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">📲 DM us to book it →</a>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══ COACHES ══ -->
+<!-- the team. photos live in people/coaches, greyed out by default with colour on hover. -->
+<div class="section-wrap reveal" id="coaches">
+  <div class="section-label">The Team</div>
+  <h2 class="section-title">Meet the Coaches</h2>
+  <p class="section-body">The humans who count your reps, fix your form, and cheer the loudest right when you want to quit. Say hi to the crew.</p>
+  <div class="coaches-grid">
+    <div class="coach-card">
+      <img class="coach-photo" src="people/coaches/Coach%20Akshit.jpeg" alt="Coach Akshit" loading="lazy"/>
+      <div class="coach-info">
+        <div class="coach-tag">Founder</div>
+        <h4 class="coach-name">Coach Akshit</h4>
+        <p class="coach-about">The man who started it all, with a simple vision: a healthy world, built one healthy person at a time. Smiles widest right when it starts to hurt.</p>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img class="coach-photo" src="people/coaches/Coach%20Amit.jpeg" alt="Coach Amit" loading="lazy"/>
+      <div class="coach-info">
+        <h4 class="coach-name">Coach Amit</h4>
+        <p class="coach-about">The most experienced coach in the building and the softest spoken. Never raises his voice, yet you will still find that extra rep every single time.</p>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img class="coach-photo" src="people/coaches/Coach%20Abhijeet.jpeg" alt="Coach Abhijeet" loading="lazy"/>
+      <div class="coach-info">
+        <h4 class="coach-name">Coach Abhijeet</h4>
+        <p class="coach-about">Solid, experienced, and calm under a heavy barbell. Off the clock he is out chasing sunsets on his motorbike, on the clock he is chasing your last rep.</p>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img class="coach-photo" src="people/coaches/Coach%20Pearl.jpeg" alt="Coach Pearl" loading="lazy"/>
+      <div class="coach-info">
+        <h4 class="coach-name">Coach Pearl</h4>
+        <p class="coach-about">The kindest person in the building, and it shows. Walks in with enough positive energy to power the speakers, then fixes your squat and your mood in the same breath.</p>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img class="coach-photo" src="people/coaches/Coach%20Pathan.jpeg" alt="Coach Pathan" loading="lazy"/>
+      <div class="coach-info">
+        <h4 class="coach-name">Coach Pathan</h4>
+        <p class="coach-about">Powerlifter at heart. Turns "I can't" into "I just did" in about an hour. Whatever you deadlift, he warms up with it.</p>
+      </div>
+    </div>
+    <div class="coach-card">
+      <img class="coach-photo" src="people/coaches/Coach%20Vardhan.jpeg" alt="Coach Vardhan" loading="lazy"/>
+      <div class="coach-info">
+        <h4 class="coach-name">Coach Vardhan</h4>
+        <p class="coach-about">Fitness influencer, lifter first. Loves lifting more than burpees, which is saying something at a crossfit box. PS: still not over his RE.</p>
+      </div>
+    </div>
+  </div>
+  <!-- one support staff, khairul, the backbone of the box -->
+  <div class="backbone">
+    <div class="coach-card">
+      <img class="coach-photo" src="people/support-staff/Khairul.jpeg" alt="Khairul" loading="lazy"/>
+      <div class="coach-info">
+        <div class="coach-tag">Backbone of the Box</div>
+        <h4 class="coach-name">Khairul</h4>
+        <p class="coach-about">Keeps the box spotless, the kettlebells racked, and the vibe high. Nothing here runs without him, which is exactly why he is the backbone.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══ SCHEDULE ══ -->
+<!-- the group session timings. box hours up top, then a card per day group. -->
+<div class="section-wrap reveal" id="schedule">
+  <div class="section-label">Timings</div>
+  <h2 class="section-title">Class Schedule</h2>
+  <p class="section-body">The box is open 6 AM to 9 PM Monday to Friday, and 8 AM to 6 PM on Saturday. Coached group sessions run at the times below. Outside those hours the floor is open gym, so you can drop in and train on your own with crossfit, hyrox or traditional gym equipment.</p>
+  <div class="schedule-grid">
+    <div class="sched-card">
+      <h4 class="sched-day">Monday to Friday</h4>
+      <div class="sched-block">Morning</div>
+      <div class="time-pills">
+        <span class="time-pill">6:00 AM</span>
+        <span class="time-pill">7:00 AM</span>
+        <span class="time-pill">8:00 AM</span>
+        <span class="time-pill">9:00 AM</span>
+        <span class="time-pill">10:00 AM</span>
+      </div>
+      <div class="sched-block">Evening</div>
+      <div class="time-pills">
+        <span class="time-pill">4:00 PM</span>
+        <span class="time-pill">5:00 PM</span>
+        <span class="time-pill">6:00 PM</span>
+        <span class="time-pill">7:00 PM</span>
+        <span class="time-pill">8:00 PM</span>
+      </div>
+      <div class="sched-block">Open Gym</div>
+      <div class="time-pills"><span class="time-pill">11:00 AM to 4:00 PM</span></div>
+    </div>
+    <div class="sched-card">
+      <h4 class="sched-day">Saturday</h4>
+      <div class="sched-session"><span class="time-pill">8:00 AM</span><span class="sched-session-name">Community Session</span></div>
+      <div class="sched-session"><span class="time-pill">9:15 AM</span><span class="sched-session-name">Hyrox Focused Training</span></div>
+      <div class="sched-block">Open Gym</div>
+      <div class="time-pills"><span class="time-pill">11:00 AM to 6:00 PM</span></div>
+    </div>
+    <div class="sched-card sched-card--rest">
+      <div class="sched-rest-emoji">😴</div>
+      <h4 class="sched-day">Sunday</h4>
+      <div class="sched-block">Rest Day</div>
+      <p class="sched-rest-text">Box closed, and that is by design. Recovery is part of the program in CrossFit, so today's only WOD is a solid nap. Rest hard, come back stronger.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
 <!-- ══ WOD GENERATOR ══ -->
-<div class="section-wrap reveal">
+<div class="section-wrap reveal" id="wod">
   <div class="section-label">Interactive</div>
-  <div class="section-title">Today's WOD Generator</div>
-  <p class="section-body">Can't make it to the box? Here's a WOD to torture yourself with at home. You're welcome.</p>
+  <h2 class="section-title">Today's WOD Generator</h2>
+  <p class="section-body">Pick where you're training and roll the dice. Real crossfit benchmarks for the box, no-equipment burners for home. Scale it down or send it RX, it's the same workout either way.</p>
   <div class="wod-card">
-    <div class="wod-display" id="wodDisplay">Hit "Generate" to find out what suffering awaits you today.</div>
+    <div class="wod-toggle" role="group" aria-label="Where are you training">
+      <button class="wod-btn mode-btn hot" data-mode="gym">🏋️ At the Box</button>
+      <button class="wod-btn mode-btn" data-mode="home">🏠 At Home</button>
+    </div>
+    <div class="wod-display" id="wodDisplay">Pick a spot and hit generate to find out what suffering awaits you today.</div>
     <div class="wod-meta" id="wodMeta"></div>
     <div class="wod-actions">
-      <button class="wod-btn hot" onclick="generateWOD()">🎲 Generate WOD</button>
-      <button class="wod-btn" id="scaleBtn" onclick="scaleWOD()" style="display:none">📉 Scale it (coward mode)</button>
-      <button class="wod-btn" id="rxBtn" onclick="rxWOD()" style="display:none">💀 RX (send help)</button>
+      <button class="wod-btn hot" id="genBtn">🎲 Generate WOD</button>
+      <div class="wod-level" id="wodLevel" style="display:none" role="group" aria-label="Difficulty">
+        <button class="wod-btn level-btn" data-level="scaled">📉 Scaled</button>
+        <button class="wod-btn level-btn hot" data-level="rx">💀 RX</button>
+      </div>
     </div>
   </div>
   <p style="font-size:.78rem;color:var(--text3);font-family:'Barlow Condensed',sans-serif;letter-spacing:.05em;text-align:center">⚠️ Side effects: lying on the floor, questioning your choices, and coming back tomorrow.</p>
@@ -261,9 +294,9 @@
 <div class="section-divider"></div>
 
 <!-- ══ EXCUSE BUSTER ══ -->
-<div class="section-wrap reveal">
+<div class="section-wrap reveal" id="excuses">
   <div class="section-label">The Classic</div>
-  <div class="section-title">Excuse Buster 3000™</div>
+  <h2 class="section-title">Excuse Buster 3000™</h2>
   <p class="section-body">We've heard them all. Every. Single. One. Hit the button and watch your excuse crumble in real time.</p>
   <div class="excuse-card">
     <div class="excuse-text" id="excuseText">Click below and confess your excuse...</div>
@@ -279,39 +312,23 @@
 <!-- ══ COMMUNITY ══ -->
 <div class="section-wrap reveal">
   <div class="section-label">Why CFHC</div>
-  <div class="section-title">More Than a Gym</div>
+  <h2 class="section-title">More Than a Gym</h2>
   <p class="section-body">We're an official CrossFit affiliate in the heart of HITEC City. Whether you're a first-timer or a seasoned athlete, you'll find your place here.</p>
   <div class="community-grid">
-    <div class="community-card"><div class="emoji">🏋️</div><h4>Free Trial</h4><p>First class free. DM us on Instagram or call to book your slot.</p></div>
-    <div class="community-card"><div class="emoji">💪</div><h4>All Levels</h4><p>Beginner to beast mode — every WOD is scaled to where you're at.</p></div>
-    <div class="community-card"><div class="emoji">🤝</div><h4>Strong Community</h4><p>The only place where strangers cheer you through your last rep.</p></div>
+    <div class="community-card"><div class="emoji">💪</div><h4>All Levels</h4><p>Beginner to beast mode, every WOD is scaled to where you're at.</p></div>
     <div class="community-card"><div class="emoji">🗓️</div><h4>Strong Saturdays</h4><p>Our legendary team WODs. You'll hate it. You'll love it. You'll be back.</p></div>
-    <div class="community-card"><div class="emoji">📍</div><h4>Prime Location</h4><p>Right inside ITPH CapitaLand — no excuse if you work in HITEC City.</p></div>
+    <div class="community-card"><div class="emoji">📍</div><h4>Prime Location</h4><p>Right inside ITPH CapitaLand. No excuse if you work in HITEC City.</p></div>
     <div class="community-card"><div class="emoji">✅</div><h4>Official Affiliate</h4><p>Certified CrossFit programming. Real coaches. Real results.</p></div>
   </div>
 </div>
 
 <div class="section-divider"></div>
 
-<!-- ══ PROGRESS ══ -->
-<div class="section-wrap reveal">
-  <div class="section-label">Status Update</div>
-  <div class="section-title">Website WOD</div>
-  <p class="section-body">Our website is a work in progress. Like any good CrossFitter — it started strong, hit a wall, and is currently on the floor breathing.</p>
-  <div class="wod-row"><div class="wod-name">Design ✅</div><div class="wod-bar-bg"><div class="wod-bar-fill" style="--w:100%;animation-duration:1.2s"></div></div><div class="wod-pct">100%</div></div>
-  <div class="wod-row"><div class="wod-name">Branding ✅</div><div class="wod-bar-bg"><div class="wod-bar-fill" style="--w:90%;animation-duration:1.5s"></div></div><div class="wod-pct">90%</div></div>
-  <div class="wod-row"><div class="wod-name">Content Writing 🥵</div><div class="wod-bar-bg"><div class="wod-bar-fill" style="--w:65%;animation-duration:2s"></div></div><div class="wod-pct">65%</div></div>
-  <div class="wod-row"><div class="wod-name">Convincing Coach 😅</div><div class="wod-bar-bg"><div class="wod-bar-fill" style="--w:35%;animation-duration:2.5s"></div></div><div class="wod-pct">35%</div></div>
-  <div class="wod-row"><div class="wod-name">Going Live 😵</div><div class="wod-bar-bg"><div class="wod-bar-fill" style="--w:5%;animation-duration:3s"></div></div><div class="wod-pct">5%</div></div>
-</div>
-
-<div class="section-divider"></div>
-
 <!-- ══ CONTACT ══ -->
-<div class="section-wrap reveal">
+<div class="section-wrap reveal" id="contact">
   <div class="section-label">Don't Wait</div>
-  <div class="section-title">Reach Us Now</div>
-  <p class="section-body">The website isn't ready. The box is. Come in, say hi, get humbled.</p>
+  <h2 class="section-title">Reach Us Now</h2>
+  <p class="section-body">The box is open and ready. Come in, say hi, get humbled.</p>
   <div class="contact-grid">
     <a class="contact-card" href="tel:+919811176700"><div class="cc-label">📞 Call / WhatsApp</div><div class="cc-value">+91 98111 76700</div></a>
     <a class="contact-card ig" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">
@@ -323,105 +340,44 @@
 
   <div class="trial-box">
     <h3>Ready to Stop Scrolling and Start Lifting?</h3>
-    <p>Your first class is on us. DM us on Instagram or call to book your free trial session. No experience needed — just show up.</p>
-    <a class="btn-white" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener" onclick="fireConfetti()">🔥 Book My Free Trial</a>
+    <p>Your first class is on us. DM us on Instagram or call to book your free trial session. No experience needed, just show up.</p>
+    <a class="btn-white js-trial" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener" onclick="fireConfetti()">🔥 Book My Free Trial</a>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══ CAREERS ══ -->
+<div class="section-wrap reveal" id="careers">
+  <div class="section-label">Careers</div>
+  <h2 class="section-title">Coach With Us</h2>
+  <p class="section-body">We are always on the lookout for amazing crossfit coaches. If you can fix a squat, run a room, and genuinely care about people getting stronger, we should talk.</p>
+  <div class="contact-grid">
+    <a class="contact-card ig" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">
+      <svg class="ig-icon" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="#E1306C" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="#E1306C" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C"/></svg>
+      <div class="cc-label">DM us on Instagram</div><div class="cc-value">@crossfithiteccity</div>
+    </a>
+    <a class="contact-card" href="https://wa.me/919811176700"><div class="cc-label">💬 WhatsApp us</div><div class="cc-value">+91 98111 76700</div></a>
+    <a class="contact-card full" href="mailto:akshit@unlockhealth.co.in"><div class="cc-label">📧 Or drop us a mail</div><div class="cc-value">akshit@unlockhealth.co.in</div></a>
   </div>
 </div>
 
 <footer>© CrossFit HITEC City · All Reps Reserved · No Excuses · <a href="https://instagram.com/crossfithiteccity" target="_blank">@crossfithiteccity</a></footer>
 
-<script>
-// THEME
-const html=document.documentElement,themeBtn=document.getElementById('themeBtn');
-const themeIcon=document.getElementById('themeIcon'),themeLabel=document.getElementById('themeLabel');
-let dark=localStorage.getItem('cf-theme')?localStorage.getItem('cf-theme')==='dark':window.matchMedia('(prefers-color-scheme:dark)').matches;
-function applyTheme(d){html.setAttribute('data-theme',d?'dark':'light');themeIcon.textContent=d?'☀️':'🌙';themeLabel.textContent=d?'Light':'Dark';localStorage.setItem('cf-theme',d?'dark':'light')}
-applyTheme(dark);themeBtn.addEventListener('click',()=>{dark=!dark;applyTheme(dark)});
+<!-- ══ TRIAL MODAL ══ -->
+<!-- pops up when any free trial button is clicked, lets people pick instagram or whatsapp -->
+<div class="modal-overlay" id="trialModal" hidden>
+  <div class="modal-card">
+    <button class="modal-close" aria-label="Close">✕</button>
+    <h3>Book Your Free Trial</h3>
+    <p>Pick whichever is easier. We reply on both, fast.</p>
+    <a class="modal-btn ig" href="https://instagram.com/crossfithiteccity" target="_blank" rel="noopener">📲 DM on Instagram</a>
+    <a class="modal-btn wa" href="https://wa.me/919811176700?text=Hi!%20I%20want%20to%20book%20my%20free%20trial%20class%20at%20CrossFit%20HITEC%20City." target="_blank" rel="noopener">💬 WhatsApp Us</a>
+  </div>
+</div>
 
-// TICKER
-const items=['🔥 Website Coming Soon','✅ Box Very Much Open','📲 DM for Free Trial','💪 Fitness For Everyone','🧡 Official CrossFit Affiliate','🗓️ Strong Saturdays','📍 ITPH CapitaLand HITEC City','😤 No Excuses'];
-const tickerEl=document.getElementById('ticker');
-const full=[...items,...items].map(t=>`<span class="ticker-item">${t}<span class="ticker-sep">·</span></span>`).join('');
-tickerEl.innerHTML=full+full;
-
-// DROPS
-const dropsEl=document.getElementById('drops');
-for(let i=0;i<20;i++){const d=document.createElement('div');d.className='drop';const h=Math.random()*10+4;d.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*-20}%;height:${h}px;width:${Math.random()*2+1}px;--dur:${Math.random()*6+5}s;--del:${Math.random()*10}s`;dropsEl.appendChild(d)}
-
-// COUNTERS
-function animateCount(el,target,dur){let s=0,step=target/(dur/16);const iv=setInterval(()=>{s=Math.min(s+step,target);el.textContent=Math.floor(s).toLocaleString();if(s>=target)clearInterval(iv)},16)}
-setTimeout(()=>{animateCount(document.getElementById('followerCount'),2497,1800);animateCount(document.getElementById('postCount'),380,1400)},500);
-
-// WOD GENERATOR
-const wods=[
-  {name:"AMRAP 20",desc:"5 Pull-ups · 10 Push-ups · 15 Air Squats",type:"Bodyweight",emoji:"🔥"},
-  {name:"For Time",desc:"21-15-9 Thrusters (42.5/30kg) · Pull-ups",type:"Classic: Fran",emoji:"💀"},
-  {name:"EMOM 16",desc:"Odd: 10 KB Swings · Even: 10 Box Jumps (60/50cm)",type:"Conditioning",emoji:"⚡"},
-  {name:"5 Rounds For Time",desc:"400m Run · 15 Deadlifts (100/70kg) · 20 Wall Balls",type:"Grunt Work",emoji:"😤"},
-  {name:"AMRAP 12",desc:"3 Muscle-Ups · 6 Squat Cleans (70/50kg) · 9 Toes-to-Bar",type:"Skill+Strength",emoji:"🏆"},
-  {name:"For Time",desc:"1K Row · 50 Burpees · 1K Run · 50 Burpees · 1K Row",type:"Suffer Fest™",emoji:"🫠"},
-  {name:"EMOM 20",desc:"1: 5 Heavy Back Squats · 2: 10 Ring Dips · 3: 15 GHD Sit-ups · 4: Rest",type:"Strength+Skill",emoji:"💪"},
-  {name:"7 Rounds For Time",desc:"7 Handstand Push-ups · 7 Power Cleans (60/42.5kg) · 7 Bar-Facing Burpees",type:"Hero WOD Vibes",emoji:"🫡"},
-  {name:"Tabata",desc:"8 Rounds: 20s Max Effort Rowing · 10s Rest (Score = total cals)",type:"Sprint",emoji:"🚣"},
-  {name:"Strong Saturday Special 🧡",desc:"In teams of 2: 100 Synchro Wall Balls · 80 Partner Deadlifts · 60 Synchro Box Jumps · 40 Partner KB Swings · 20 Rope Climbs",type:"Team WOD",emoji:"🤝"},
-];
-const scaled=["Half the reps, half the weight, full the pride.","Ring rows instead of pull-ups. We see you. We support you.","Box squats. Half weight. Extra smiles.","Cut the run to 200m. You showed up. That's enough.","30min cap. The clock is your friend today."];
-const rx=["Add 10kg. Halve the rest. Double the suffering.","RX+ means you do it again immediately after.","No chalk. Wet hands. That's the real RX.","Time cap? There is no time cap for the brave.","RX is just the beginning. Real champs go for RX+2."];
-function generateWOD(){
-  const wod=wods[Math.floor(Math.random()*wods.length)];
-  const d=document.getElementById('wodDisplay');d.style.opacity=0;
-  setTimeout(()=>{d.textContent=`${wod.emoji} ${wod.name}: ${wod.desc}`;d.style.opacity=1},200);
-  document.getElementById('wodMeta').innerHTML=`<span>Type:</span>${wod.type}`;
-  document.getElementById('scaleBtn').style.display='inline-flex';
-  document.getElementById('rxBtn').style.display='inline-flex';
-  document.querySelector('.wod-btn.hot').textContent='🎲 Another One';
-}
-function scaleWOD(){document.getElementById('wodMeta').innerHTML=`<span>Scaled:</span>${scaled[Math.floor(Math.random()*scaled.length)]}`}
-function rxWOD(){document.getElementById('wodMeta').innerHTML=`<span>RX Note:</span>${rx[Math.floor(Math.random()*rx.length)]}`}
-
-// EXCUSE BUSTER
-const excuses=[
-  ["I'm too tired after work.","So are we. We come anyway. See you at 6am."],
-  ["I don't know how to do CrossFit.","Nobody did. Now they deadlift twice their bodyweight. First class is free."],
-  ["It's too expensive.","One EMI missed on that phone upgrade = 2 months of CrossFit. Think about it."],
-  ["I need to get fit before I start.","That's like washing dishes before putting them in the dishwasher."],
-  ["I'm scared of getting injured.","Sitting at a desk 9 hours a day is also an injury. Just slower."],
-  ["My friends aren't into it.","They will be. After they see the transformation. Or they won't. Come alone."],
-  ["I don't have time.","You have time for Instagram Reels. You have time. We're just saying."],
-  ["I tried CrossFit and it was too hard.","Good. Hard things make you better. The second class is easier. DM us."],
-  ["I'll start on Monday.","Classic. Monday called. It says stop using it as a scapegoat."],
-  ["I'm not the gym type.","Neither was our athlete who arrived in office clothes. He coaches here now."],
-];
-function bustExcuse(){
-  const [ex,reply]=excuses[Math.floor(Math.random()*excuses.length)];
-  const et=document.getElementById('excuseText'),rt=document.getElementById('replyText');
-  et.style.transition='opacity .18s';rt.style.transition='opacity .18s';
-  et.style.opacity=0;rt.style.opacity=0;
-  setTimeout(()=>{et.textContent=`"${ex}"`;rt.textContent=`→ ${reply}`;et.style.opacity=1;rt.style.opacity=1},200);
-}
-
-// CONFETTI
-const canvas=document.getElementById('confetti'),ctx=canvas.getContext('2d');
-let particles=[];
-function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-resizeCanvas();window.addEventListener('resize',resizeCanvas);
-function fireConfetti(){
-  const colors=['#E87722','#fff','#FF2E2E','#FFD700','#FF6B35'];
-  for(let i=0;i<140;i++)particles.push({x:Math.random()*canvas.width,y:-10,vx:(Math.random()-.5)*7,vy:Math.random()*4+2,color:colors[Math.floor(Math.random()*colors.length)],size:Math.random()*9+4,rotation:Math.random()*360,rotSpeed:(Math.random()-.5)*8,life:1,decay:Math.random()*.015+.007});
-  if(!animating)animate();
-}
-let animating=false;
-function animate(){
-  animating=true;ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles=particles.filter(p=>p.life>0);
-  particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.1;p.rotation+=p.rotSpeed;p.life-=p.decay;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rotation*Math.PI/180);ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.color;ctx.fillRect(-p.size/2,-p.size/4,p.size,p.size/2);ctx.restore()});
-  if(particles.length>0)requestAnimationFrame(animate);else animating=false;
-}
-
-// SCROLL REVEAL
-const reveals=document.querySelectorAll('.reveal');
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
-reveals.forEach(r=>obs.observe(r));
-</script>
+<script src="js/wods.js?v=2"></script>
+<script src="js/excuses.js?v=2"></script>
+<script src="js/main.js?v=4"></script>
 </body>
 </html>
