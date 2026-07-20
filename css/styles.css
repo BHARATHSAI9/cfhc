@@ -98,15 +98,16 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 
 /* ── SECTION ── */
 /* scroll-margin keeps anchored sections from hiding under the fixed nav */
-.section-wrap{padding:4rem 1.5rem;max-width:700px;margin:0 auto;scroll-margin-top:56px}
+.section-wrap{padding:4rem 1.5rem;max-width:1060px;margin:0 auto;scroll-margin-top:56px}
 .section-label{font-family:'Barlow Condensed',sans-serif;font-size:clamp(.85rem,2.2vw,.95rem);font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:.5rem}
 /* weight 400 because the titles are real h2s now and bebas has no bold, so the browser would fake one */
 .section-title{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(2rem,6vw,3rem);letter-spacing:.03em;line-height:1;margin-bottom:1.25rem}
-.section-body{color:var(--text2);font-size:.95rem;line-height:1.7;margin-bottom:1.5rem}
+/* cap the intro paragraphs so lines stay readable even though the section is now wider */
+.section-body{color:var(--text2);font-size:.95rem;line-height:1.7;margin-bottom:1.5rem;max-width:680px}
 .section-divider{width:100%;height:1px;background:var(--border);margin:0}
 
 /* ── WOD GENERATOR ── */
-.wod-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.75rem;margin-bottom:1rem;transition:background .3s,border-color .3s;position:relative;overflow:hidden}
+.wod-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.75rem;margin-bottom:1rem;transition:background .3s,border-color .3s;position:relative;overflow:hidden;max-width:660px}
 .wod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--orange)}
 /* box vs home toggle sits above the workout */
 .wod-toggle{display:flex;gap:.5rem;margin-bottom:1.1rem}
@@ -125,7 +126,7 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .wod-btn.hot{background:var(--orange);border-color:var(--orange);color:#fff}
 
 /* ── EXCUSE ── */
-.excuse-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.5rem 1.75rem;margin-bottom:1.25rem;transition:background .3s;position:relative;overflow:hidden}
+.excuse-card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.5rem 1.75rem;margin-bottom:1.25rem;transition:background .3s;position:relative;overflow:hidden;max-width:660px}
 .excuse-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:#E87722}
 .excuse-text{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:1.05rem;color:var(--text2);margin-bottom:.75rem;min-height:2.5rem;transition:opacity .2s}
 .reply-text{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:700;color:var(--orange);transition:opacity .2s}
@@ -139,7 +140,9 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .community-card p{font-size:.82rem;color:var(--text2);line-height:1.5}
 
 /* ── SCHEDULE ── */
-.schedule-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+/* two even columns (mon-fri and saturday) with sunday spanning full width below. one column on small screens */
+.schedule-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){.schedule-grid{grid-template-columns:1fr}}
 .sched-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.5rem;position:relative;overflow:hidden;transition:background .3s,border-color .3s}
 .sched-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--orange)}
 .sched-day{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.03em;color:var(--text);margin-bottom:.5rem}
@@ -154,7 +157,8 @@ body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-
 .sched-rest-emoji{font-size:2.4rem;margin-bottom:.4rem;line-height:1}
 
 /* ── COACHES ── */
-.coaches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+/* wider min so we get 3 across on desktop (keeps the 6 coaches as a balanced 3 + 3) */
+.coaches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
 .coach-card{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:border-color .2s,transform .2s}
 .coach-card:hover{border-color:var(--orange);transform:translateY(-3px)}
 /* photos are a mixed bag, so crop them square and grey them out so the row looks like one set. colour comes back on hover */
